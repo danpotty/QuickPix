@@ -1,28 +1,37 @@
 <h1>HOME</h1>
+<md-content>
+    <div layout="column" ng-show="global.status._id">
+        <br>
+        <form ng-submit="vm.createPost()" layout-padding>
+            <md-input-container flex>
+                <label>Image URL!</label>
+                <input type="text" ng-model="vm.post.image" required/>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Message!</label>
+                <input type="text" ng-model="vm.post.message" />
+            </md-input-container>
+            <md-button type="submit" flex="10">Submit</md-button>
+        </form>
+      </div>  
+        <md-divider />
 
-<div ng-controller="AppCtrl" ng-cloak layout="column">
-  <md-list>
-    <md-list-item class="md-4-line" ng-repeat="p in vm.posts">
-      <md-content class="md-padding" layout="row" layout-wrap layout-align="center start">
-        <div flex="50" layout="column">
-          <md-card>
-            <md-card-content layout="row" layout-align="space-between">
-              <div class="md-media-xl card-media"><img ng-src='{{p.image}}' /></div>
-              <md-card-actions layout="column">
-                <md-button class="md-icon-button" aria-label="Favorite">
-                  <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
-                </md-button>
-                <md-button class="md-icon-button" aria-label="Settings">
-                  <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
-                </md-button>
-                <md-button class="md-icon-button" aria-label="Share">
-                  <md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>
-                </md-button>
-              </md-card-actions>
-            </md-card-content>
-          </md-card>
+        <div ng-cloak layout="column">
+            <md-list>
+                <md-list-item class="md-4-line" ng-repeat="p in vm.posts">
+                    <md-content class="md-padding" layout="row" layout-wrap layout-align="center start">
+                        <div flex="50" layout="row">
+                            <md-card>
+                                <md-card-content layout="row" layout-align="space-between">
+                                    <div class="md-media-xl card-media"><img ng-src='{{p.image}}' /><p>{{p.message}}</p></div>
+                                    
+                                    <md-card-actions layout="row">
+
+                                    </md-card-actions>
+                                </md-card-content>
+                            </md-card>
+                        </div>
+                    </md-content>
+                </md-list-item>
+            </md-list>
         </div>
-      </md-content>
-    </md-list-item>
-  </md-list>
-</div>
