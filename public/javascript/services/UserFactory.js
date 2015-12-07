@@ -5,6 +5,7 @@
 
   function UserFactory($http, $q, $window) {
     var o = {};
+    o.status = {};
 
     o.register = function(user) {
       var q = $q.defer();

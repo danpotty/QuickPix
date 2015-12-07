@@ -5,6 +5,8 @@
 
   function GlobalController(UserFactory, $state) {
     var vm = this;
+    vm.user = {};
+    vm.status = UserFactory.status;
 
     vm.register = function() {
       UserFactory.register(vm.user).then(function(res) {
