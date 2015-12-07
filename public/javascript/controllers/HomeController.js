@@ -7,6 +7,10 @@
 		var vm = this;
 		vm.posts = [];
 
+			HomeFactory.getAllPosts().then(function(res) {
+				vm.posts = res;
+			});
+
 		vm.createPost = function(){
 			HomeFactory.createPost(vm.post).then(function(res){
 				res.createdBy = {};

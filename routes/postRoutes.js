@@ -11,6 +11,15 @@ let auth = jwt({
   secret: 'hiskett & sons'
 });
 
+router.get('/', (req, res, next) => {
+  Post.find({})
+    .populate('image', 'message', 'dateCreated', 'rating', 'createdBy')
+    .exec((err, result) => {
+      if(err) return next(err);
+      res.send(result);
+    });
+});
+
 router.post("/", auth, (req, res, next) => {
 	let post = new Post(req.body);
 	post.createdBy = req.payload._id;
