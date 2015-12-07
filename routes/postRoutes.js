@@ -44,9 +44,18 @@ router.delete("/:id", (req, res, next) => {
   });
 });
 
-router.put("/:id", (req, res, next) => {
-  Post.update({ _id : req.params.id }, req.body, (err, result) => {
-    if(err) return next(err);
+router.put("/upvote/:id", (req, res, next) => {
+  Post.findOne({ _id : req.params.id }).exec((err, result) => {
+    result.rating++;
+    result.save();
+    res.send(result);
+  });
+});
+
+router.put("/downvote/:id", (req, res, next) => {
+  Post.findOne({ _id : req.params.id }).exec((err, result) => {
+    result.rating--;
+    result.save();
     res.send(result);
   });
 });
