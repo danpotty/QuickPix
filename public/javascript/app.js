@@ -21,7 +21,7 @@
 		}).state('PostDetails',{
 			url: '/post/:id',
 			templateUrl: '/templates/post_details.html',
-			// controller: ' as vm'
+			controller: 'PostDetailsController as vm'
 		});
 		$urlRouterProvider.otherwise('/');
 

@@ -8,7 +8,7 @@
 
     o.getPostById = function(id) {
       var q = $q.defer();
-      $http.get('/api/v1/posts/' + id).then(function(res) {
+      $http.get('/api/v1/comments/' + id).then(function(res) {
         q.resolve(res.data);
       });
       return q.promise;

@@ -7,10 +7,15 @@
     var vm = this;
 
     if(!$stateParams.id) $state.go('Home');
-    HomeFactory.getPostById($stateParams.id).then(function(res){
+    CommentFactory.getPostById($stateParams.id).then(function(res){
       vm.post = res;
     });
 
+    vm.createComment = function(){
+      CommentFactory.createComment(vm.comment).then(function(res){
+        vm.comment = "";
+      });
+    };
 
   }
 })();

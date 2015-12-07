@@ -28,6 +28,7 @@ app.use(passport.initialize());
 
 let userRoutes = require('./routes/userRoutes');
 let postRoutes = require('./routes/postRoutes');
+let commentRoutes = require('./routes/commentRoutes');
 
 app.get('/', function(req, res) {
 	res.render('index');
@@ -35,6 +36,7 @@ app.get('/', function(req, res) {
 
 app.use('/api/v1/users/', userRoutes);
 app.use('/api/v1/posts/', postRoutes);
+app.use('/api/v1/comments', commentRoutes);
 
 app.use((err, req, res, next) => {
 	if(process.env.NODE_ENV !== 'test') {console.log(err)}

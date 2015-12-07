@@ -25,18 +25,6 @@
 			HomeFactory.deletePost(post._id);
 		};
 
-
-		//------------------------------------------------------
-		//------------------COMMENT FUNCTIONS-------------------
-		//------------------------------------------------------
-
-		vm.createComment = function(){
-			HomeFactory.createComment(vm.comment).then(function(res){
-				res.createdBy = {};
-				res.createdBy._id = UserFactory.status._id;
-				res.createdBy.username = UserFactory.status.username;
-				vm.comment = "";
-
 		vm.startEdit = function(post){
 			vm.isEditing = true;
 			vm.selectedPost = post;
