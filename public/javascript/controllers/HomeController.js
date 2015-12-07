@@ -4,6 +4,7 @@
 	.controller('HomeController', HomeController);
 
 	function HomeController(UserFactory, HomeFactory, $state) {
+
 		var vm = this;
 	}
 })();
