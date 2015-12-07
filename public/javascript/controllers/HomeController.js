@@ -5,7 +5,6 @@
 
 	function HomeController(UserFactory, HomeFactory, $state) {
 		var vm = this;
-		vm.posts = [];
 
 			HomeFactory.getAllPosts().then(function(res) {
 				vm.posts = res;

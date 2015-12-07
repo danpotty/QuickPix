@@ -18,8 +18,12 @@
 			url: '/profile',
 			templateUrl: '/templates/profile.html',
 			controller: 'ProfileController as vm'
+		}).state('PostDetails',{
+			url: '/post/:id',
+			templateUrl: '/templates/post_details.html',
+			// controller: ' as vm'
 		});
 		$urlRouterProvider.otherwise('/');
-		
+
 	}
 })();
