@@ -3,8 +3,7 @@
 	angular.module('app')
 	.controller('HomeController', HomeController);
 
-	function HomeController() {
+	function HomeController(UserFactory, HomeFactory) {
 		var vm = this;
-		vm.title = 'Welcome to our App!';
 	}
 })();
