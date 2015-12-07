@@ -2,29 +2,6 @@
 <md-content>
     <div layout="column" ng-show="global.status._id">
         <br>
-        <!--         <form ng-submit="vm.createPost()" ng-show="!vm.isEditing" layout-padding>
-            <md-input-container flex>
-                <label>Image URL!</label>
-                <input type="text" ng-model="vm.post.image" required/>
-            </md-input-container>
-            <md-input-container flex>
-                <label>Message!</label>
-                <input type="text" ng-model="vm.post.message" />
-            </md-input-container>
-            <md-button type="submit" flex="10">Submit</md-button>
-        </form>
-
-        <form ng-submit="vm.createPost()" ng-show="vm.isEditing" layout-padding>
-            <md-input-container flex>
-                <label>Image URL!</label>
-                <input type="text" ng-model="vm.post.image" required/>
-            </md-input-container>
-            <md-input-container flex>
-                <label>Message!</label>
-                <input type="text" ng-model="vm.post.message" />
-            </md-input-container>
-            <md-button type="submit" flex="10">Submit</md-button>
-        </form> -->
         <form ng-submit="vm.createPost()" ng-show="!vm.isEditing" layout-padding flex>
             <md-input-container flex>
                 <label>Post!</label>
@@ -51,13 +28,15 @@
                 <md-content class="md-padding" layout="row" layout-wrap layout-align="center">
                     <div flex layout="row">
                         <md-card>
-                            <md-card-content layout="row" layout-align="space-between">
+                            <md-card-content layout="column" layout-align="space-between">
                                 <div class="md-media-xl card-media">
                                     <img ng-src='{{p.image}}' />
                                     <p><i>{{p.message}}</i></p>
                                 </div>
-                                <md-card-actions layout="row">
-                                </md-card-actions>
+                                <div layout="row" layout-align="end center">
+                              <md-button class="editButton" ng-click="vm.startEdit(p)">Edit</md-button>
+                              <md-button class="editButton" ng-click="vm.deletePost(p)">Delete</md-button>
+                          </div>
                             </md-card-content>
                         </md-card>
                     </div>
