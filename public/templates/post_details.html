@@ -1,1 +1,22 @@
 <h1>Post</h1>
+<div ng-cloak layout layout="column" layout-align="center" ui-sref="PostDetails({id: p._id})">
+    <md-list>
+        <md-list-item class="md-4-line" ng-repeat="p in vm.posts">
+            <md-content class="md-padding" layout="row" layout-wrap layout-align="center">
+                <div flex layout="row">
+                    <md-card>
+                        <md-card-content layout="row" layout-align="space-between">
+                            <div class="md-media-xl card-media">
+                                <img ng-src='{{p.image}}' />
+                                <p><i>{{p.message}}</i></p>
+                            </div>
+                            
+                            <md-card-actions layout="row">
+                            </md-card-actions>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </md-content>
+        </md-list-item>
+    </md-list>
+</div>
