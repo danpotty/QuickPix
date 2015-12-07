@@ -24,6 +24,14 @@
 			return q.promise;
 		};
 
+		o.deletePost = function(post){
+			var q = $q.defer();
+			$http.delete("/api/v1/posts", post).then(function(res){
+				q.resolve();
+			});
+			return q.promise;
+		};
+
 
 		return o;
 	}

@@ -34,4 +34,12 @@ router.post("/", auth, (req, res, next) => {
 	});
 });
 
+router.delete("/", (req, res, next) => {
+  Post.remove({ _id: req.params.id }, (err, result) => {
+    if(err) return next(err);
+    res.send(result);
+  });
+});
+
+
 module.exports = router;
