@@ -3,7 +3,7 @@
   angular.module('app')
     .factory('UserFactory', UserFactory);
 
-  function UserFactory($http, $q) {
+  function UserFactory($http, $q, $window) {
     var o = {};
 
     o.register = function(user) {

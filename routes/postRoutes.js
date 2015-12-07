@@ -7,7 +7,7 @@ let Comment = mongoose.model('Comment');
 let User = mongoose.model('User');
 let jwt = require('express-jwt');
 let auth = jwt({
-  userProperty: 'payload'
+  userProperty: 'payload',
   secret: 'hiskett & sons'
 });
 
