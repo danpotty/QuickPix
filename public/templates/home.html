@@ -16,7 +16,11 @@
         <form ng-submit="vm.updatePost()" ng-show="vm.isEditing" layout-padding flex>
             <md-input-container>
                 <label>Post!</label>
-                <input type="text" ng-model="vm.editPost" />
+                <input type="text" ng-model="vm.editPost.image" />
+            </md-input-container>
+            <md-input-container>
+                <label>Message!</label>
+                <input type="text" ng-model="vm.editPost.message" />
             </md-input-container>
             <md-button type="submit" flex>Submit</md-button>
         </form>

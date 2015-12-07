@@ -26,8 +26,6 @@
 		};
 
 
-
-
 		//------------------------------------------------------
 		//------------------COMMENT FUNCTIONS-------------------
 		//------------------------------------------------------
@@ -38,6 +36,19 @@
 				res.createdBy._id = UserFactory.status._id;
 				res.createdBy.username = UserFactory.status.username;
 				vm.comment = "";
+
+		vm.startEdit = function(post){
+			vm.isEditing = true;
+			vm.selectedPost = post;
+			vm.editPost = angular.copy(post);
+		};
+
+		vm.updatePost = function(){
+			HomeFactory.updatePost(vm.editPost, vm.selectedPost).then(function(res){
+				vm.posts[vm.posts.indexOf(vm.selectedPost)] = vm.editPost;
+				vm.isEditing = false;
+				vm.selectedPost = null;
+				vm.editPost = null;
 			});
 		};
 
