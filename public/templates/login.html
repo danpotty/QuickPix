@@ -1,1 +1,17 @@
-<h1>LOGIN</h1>
+<md-content>
+  <md-card layout-padding>
+    <form ng-submit="global.login()">
+      <md-input-container>
+        <label>Email</label>
+        <input type="email" ng-model="global.user.email" />
+      </md-input-container>
+      <md-input-container>
+        <label>Password</label>
+        <input type="password" ng-model="global.user.password" />
+      </md-input-container>
+      <div layout layout-align="center">
+        <md-button type="submit" class="md-raised md-warn">Submit</md-button>
+      </div>
+    </form>
+  </md-card>
+</md-content>
