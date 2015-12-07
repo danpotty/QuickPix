@@ -20,9 +20,8 @@
 		};
 
 		vm.deletePost = function(post){
-			HomeFactory.deletePost(post).then(function(res){
-				$state.go('Home');
-			});
+			vm.posts.splice(vm.posts.indexOf(post), 1);
+			HomeFactory.deletePost(post._id);
 		};
 
 	};

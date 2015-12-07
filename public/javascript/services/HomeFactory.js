@@ -24,10 +24,10 @@
 			return q.promise;
 		};
 
-		o.deletePost = function(post){
+		o.deletePost = function(id){
 			var q = $q.defer();
-			$http.delete("/api/v1/posts", post).then(function(res){
-				q.resolve();
+			$http.delete("/api/v1/posts/" + id).then(function(res){
+				q.resolve(res.data);
 			});
 			return q.promise;
 		};
