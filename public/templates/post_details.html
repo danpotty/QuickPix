@@ -1,17 +1,37 @@
 <h1>Post</h1>
-<div ng-cloak layout layout="column" layout-align="center" ui-sref="PostDetails({id: p._id})">
+<div layout="column" ng-show="global.status._id">
+    <br>
+    <form ng-submit="vm.createComment()" ng-show="!vm.isEditingC" layout-padding flex>
+        <md-input-container flex>
+            <label>Comment</label>
+            <input type="text" ng-model="vm.comment.message" />
+        </md-input-container>
+        <md-button type="submit" flex>Submit</md-button>
+    </form>
+    <form ng-submit="vm.updateComment()" ng-show="vm.isEditingC" layout-padding flex>
+        <md-input-container>
+            <label>Comment</label>
+            <input type="text" ng-model="vm.editComment" />
+        </md-input-container>
+        <md-button type="submit" flex>Submit</md-button>
+    </form>
+</div>
+
+<div ng-cloak layout layout="column" layout-align="center">
     <md-list>
-        <md-list-item class="md-4-line" ng-repeat="p in vm.posts">
+        <md-list-item class="md-4-line" ng-repeat="c in vm.comments">
             <md-content class="md-padding" layout="row" layout-wrap layout-align="center">
                 <div flex layout="row">
                     <md-card>
                         <md-card-content layout="row" layout-align="space-between">
                             <div class="md-media-xl card-media">
-                                <img ng-src='{{p.image}}' />
-                                <p><i>{{p.message}}</i></p>
+                                <p><i>{{c.message}}</i></p>
                             </div>
+<<<<<<< HEAD
                             
 
+=======
+>>>>>>> d474fe8351021c934251db67fc1b168721683557
 
                             <md-card-actions layout="row">
                             </md-card-actions>
