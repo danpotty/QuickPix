@@ -44,5 +44,12 @@ router.delete("/:id", (req, res, next) => {
   });
 });
 
+router.put("/:id", (req, res, next) => {
+  Post.update({ _id : req.params.id }, req.body, (err, result) => {
+    if(err) return next(err);
+    res.send(result);
+  });
+});
+
 
 module.exports = router;
