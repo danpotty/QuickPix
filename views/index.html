@@ -15,7 +15,7 @@
         <div layout layout-align="center" ng-show="!global.status._id">
             <md-button ui-sref="Home"><span class="glyphicon glyphicon-home"></span></md-button>
             <md-button ui-sref="Login">Login</md-button>
-            <md-button ui-sref="Register">Register</md-button>
+            <md-button ng-click="global.openRegisterModal($event)">Register</md-button>
 
         </div>
         <div layout layout-align="end center" ng-show="global.status._id">
