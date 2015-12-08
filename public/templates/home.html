@@ -3,12 +3,11 @@
     <div layout="column" ng-show="global.status._id">
         <br>
         <form ng-submit="vm.createPost()" ng-show="!vm.isEditing" layout-padding flex>
-            <md-input-container flex>
-                <label>Post!</label>
+            <md-input-container >
                 <div layout>
-                    <md-button ng-click="global.pic()">Change Profile Pic</md-button>
+                    <label>Upload an Image!</label>
+                    <md-button type="button" ng-click="vm.pic()"><span class="glyphicon glyphicon-picture"></span></md-button>
                 </div>
-                <!-- <input type="filepicker" data-fp-apikey="{{vm.key}}" onchange="alert(event.fpfile.url)" ng-model="vm.post.image"> -->
             </md-input-container>
             <md-input-container flex>
                 <label>Message!</label>

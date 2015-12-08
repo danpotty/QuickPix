@@ -22,10 +22,12 @@ router.get('/', (req, res, next) => {
 });
 
 router.post("/", auth, (req, res, next) => {
+  if(!req.body.image) return next('Please include an image');
 	let post = new Post(req.body);
 	post.createdBy = req.payload._id;
   post.upVoters.push('init');
   post.downVoters.push('init');
+  post.image = req.body.image;
   // post.rating++;
 	post.save((err, result) => {
 		if(err) return next(err);
