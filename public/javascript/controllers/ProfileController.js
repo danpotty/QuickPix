@@ -30,6 +30,11 @@
 
                 });
         }
+
+        vm.deletePost = function(post){
+            vm.posts.splice(vm.posts.indexOf(post), 1);
+            HomeFactory.deletePost(post._id);
+        };
     };
 
 
