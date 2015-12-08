@@ -42,7 +42,7 @@ UserSchema.methods.generateJWT = function(){
   return jwt.sign({
     _id: this._id,
     email: this.local.email,
-    name: this.name
+    username: this.username
   }, 'hiskett & sons');
 };
 
