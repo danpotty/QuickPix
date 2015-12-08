@@ -16,6 +16,7 @@
         res.user = {};
         res.user.username = UserFactory.status.username;
         vm.post.comments.push(res);
+        vm.comment = "";
       });
     };
   };
