@@ -40,7 +40,7 @@ router.post("/:id", auth, (req, res, next) => {
 });
 
 router.put("/:id", (req, res, next) => {
-  Comment.update(req.body.message, function(err, result) {
+  Comment.update({ _id : req.params.id }, { message : req.body.message }, function(err, result) {
     if(err) return next(err);
     if(!result) return next('Comment not found!');
     res.send(result);

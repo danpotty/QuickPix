@@ -26,10 +26,9 @@
       vm.newCommentObj = angular.copy(comment);
     };
 
-    vm.updateComment = function(){
+    vm.updateComment = function(comment){
       CommentFactory.updateComment(vm.newCommentObj, vm.selectedComment).then(function(res) {
         vm.post.comments[vm.post.comments.indexOf(vm.selectedComment)] = vm.newCommentObj;
-        console.log(vm.newCommentObj);
         vm.isEditingC = false;
         vm.selectedComment = null;
         vm.editComment = null;
