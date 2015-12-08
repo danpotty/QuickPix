@@ -34,9 +34,17 @@ router.post("/:id", auth, (req, res, next) => {
 			Post.update({ _id : req.params.id }, { $push: { comments: result._id }}, (err, post) => {
 				if(err) return next(err);
 				res.send(result);
-			});	
+			});
 		});
 	});
+});
+
+router.put("/:id", (req, res, next) => {
+  Comment.update(req.body, function(err, result) {
+    if(err) return next(err);
+    if(!result) return next('Comment not found!');
+    res.send(result);
+  });
 });
 
 router.delete("/:id", (req, res, next) => {
@@ -48,6 +56,5 @@ router.delete("/:id", (req, res, next) => {
 		});
 	});
 });
-
 
 module.exports = router;
