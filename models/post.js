@@ -5,6 +5,7 @@ let postSchema = new mongoose.Schema({
 	message: String,
 	dateCreated: { type : Date, default: Date.now },
 	rating: { type: Number, default: 0 },
+	voters: [],
 	comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment"}],
 	createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User"}
 });

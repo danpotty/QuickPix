@@ -53,7 +53,9 @@ router.put("/:id", (req, res, next) => {
 });
 
 router.put("/upvote/:id", (req, res, next) => {
+  console.log(req.params.id);
   Post.findOne({ _id : req.params.id }).exec((err, result) => {
+    result.voters.push(req.params.id);
     result.rating++;
     result.save();
     res.send(result);
@@ -62,6 +64,7 @@ router.put("/upvote/:id", (req, res, next) => {
 
 router.put("/downvote/:id", (req, res, next) => {
   Post.findOne({ _id : req.params.id }).exec((err, result) => {
+    result.voters.push(req.params.id);
     result.rating--;
     result.save();
     res.send(result);
