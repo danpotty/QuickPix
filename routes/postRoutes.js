@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post("/", auth, (req, res, next) => {
-  console.log(req.body);
+  if(!req.body.image) return next('Please include an image');
 	let post = new Post(req.body);
 	post.createdBy = req.payload._id;
   post.upVoters.push('init');

@@ -3,7 +3,7 @@
     angular.module('app')
         .controller('HomeController', HomeController);
 
-    function HomeController(UserFactory, HomeFactory, $state, $stateParams) {
+    function HomeController(UserFactory, HomeFactory, $state, $stateParams, $scope) {
         var vm = this;
         vm.post = {};
 
@@ -51,6 +51,9 @@
           for(var i = 0; i < post.upVoters.length; i++){
             if(post.upVoters[i] == UserFactory.status._id){
               console.log('already voted!');
+              $scope.openToast = function($event) {
+                $mdToast.show($mdToast.simple().textContent('Hello!'));
+              }
             }
             else if((i+1) >= post.upVoters.length){
               for(var i = 0; i < post.downVoters.length; i++){
