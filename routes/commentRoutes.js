@@ -12,15 +12,31 @@ let auth = jwt({
 });
 
 router.get('/:id', (req, res, next) => {
-  Post.findOne({ _id: req.params.id }).exec((err, result) => {
+  Post.findOne({ _id: req.params.id })
+  .populate("comments")
+  .exec((err, result) => {
     if(err) return next(err);
     if(!result) next('Could not find that post');
     res.send(result);
   });
 });
 
-router.post('/', (req, res, next) => {
-  
-})
+// /api/v1/comment/:id
+router.post("/:id", auth, (req, res, next) => {
+	let comment = new Comment(req.body);
+	comment.user = req.payload._id;
+	comment.post = req.params.id;
+	comment.save((err, result) => {
+		if(err) return next(err);
+		if(!result) return next("Could not create this comment");
+		User.update({ _id : req.payload._id }, { $push: { comments: result._id }}, (err, user) => {
+			if(err) return next(err);
+			Post.update({ _id : req.params.id }, { $push: { comments: result._id }}, (err, post) => {
+				if(err) return next(err);
+				res.send(result);
+			});	
+		});
+	});
+});
 
 module.exports = router;

@@ -1,7 +1,7 @@
 <h1>Post</h1>
 <div layout="column" ng-show="global.status._id">
     <br>
-    <form ng-submit="vm.createComment()" ng-show="!vm.isEditingC" layout-padding flex>
+    <form ng-submit="vm.createComment(); comment=''" ng-show="!vm.isEditingC" layout-padding flex>
         <md-input-container flex>
             <label>Comment</label>
             <input type="text" ng-model="vm.comment.message" />
@@ -19,14 +19,22 @@
 
 <div ng-cloak layout layout="column" layout-align="center">
     <md-list>
-        <md-list-item class="md-4-line" ng-repeat="c in vm.comments">
+        <md-list-item class="md-4-line">
             <md-content class="md-padding" layout="row" layout-wrap layout-align="center">
                 <div flex layout="row">
                     <md-card>
                         <md-card-content layout="row" layout-align="space-between">
                             <div class="md-media-xl card-media">
-                                <p><i>{{c.message}}</i></p>
+                              <img ng-src='{{vm.post.image}}' />
+                              <p><i>{{vm.post.message}}</i></p>
                             </div>
+
+                            <div>
+                                <p ng-repeat="c in vm.post.comments"> {{c.message}}</p>
+                            </div>
+
+
+
                             <md-card-actions layout="row">
                             </md-card-actions>
                         </md-card-content>

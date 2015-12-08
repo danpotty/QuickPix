@@ -3,7 +3,7 @@
   angular.module('app')
   .controller('PostDetailsController', PostDetailsController);
 
-  function PostDetailsController($state, $stateParams, CommentFactory) {
+  function PostDetailsController($state, $stateParams, CommentFactory, UserFactory) {
     var vm = this;
 
     if(!$stateParams.id) $state.go('Home');
@@ -12,10 +12,11 @@
     });
 
     vm.createComment = function(){
-      CommentFactory.createComment(vm.comment).then(function(res){
-        vm.comment = "";
+      CommentFactory.createComment(vm.post._id, vm.comment).then(function(res){
+        res.user = {};
+        res.user.username = UserFactory.status.username;
+        vm.post.comments.push(res);
       });
     };
-
-  }
+  };
 })();

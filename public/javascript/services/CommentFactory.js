@@ -3,7 +3,7 @@
   angular.module('app')
   .factory('CommentFactory', CommentFactory);
 
-  function CommentFactory($http, $q) {
+  function CommentFactory($http, $q, $window) {
     var o = {};
 
     o.getPostById = function(id) {
@@ -14,6 +14,14 @@
       return q.promise;
     };
 
+    o.createComment = function(id, comment){
+      var q = $q.defer();
+      $http.post("/api/v1/comments/" + id, comment, { headers : { authorization : "Bearer " + $window.localStorage.getItem("token")}}).then(function(res){
+        q.resolve(res.data);
+      });
+      return q.promise;
+    };
+
     return o;
-  }
+  };
 })();
