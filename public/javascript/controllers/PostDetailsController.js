@@ -19,5 +19,22 @@
         vm.comment = "";
       });
     };
+
+    vm.startEdit = function(comment){
+      vm.isEditingC = true;
+      vm.selectedComment = comment;
+      vm.newComment = angular.copy(comment.message);
+    };
+
+    vm.updateComment = function(){
+      CommentFactory.updateComment(vm.newComment, vm.selectedComment).then(function(res) {
+        vm.comments[vm.comments.indexOf(vm.selectedComment)] = vm.editComment;
+        console.log(vm.editComment);
+        vm.isEditingC = false;
+        vm.selectedComment = null;
+        vm.editComment = null;
+      });
+    };
+
   };
 })();

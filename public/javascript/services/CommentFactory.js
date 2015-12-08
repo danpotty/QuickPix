@@ -22,6 +22,14 @@
       return q.promise;
     };
 
+    o.updateComment = function(newcom, oldcom) {
+      var q = $q.defer();
+      $http.put('/api/v1/comments/' + oldcom._id, newcom).then(function(res) {
+        q.resolve(res.data);
+      });
+      return q.promise;
+    };
+
     return o;
   };
 })();

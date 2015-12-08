@@ -47,7 +47,7 @@ router.delete("/:id", (req, res, next) => {
 router.put("/:id", (req, res, next) => {
   Post.update(req.body, function(err, result) {
     if(err) return next(err);
-    if(!result) return next('Comment not found!');
+    if(!result) return next('Post not found!');
     res.send(result);
   });
 });
