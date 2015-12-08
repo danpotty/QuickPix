@@ -110,6 +110,8 @@ router.put("/downvote/:id", auth, (req, res, next) => {
             result.upVoters.splice(i, 1);
             result.rating--;
             result.save();
+            console.log('vote saved!');
+            return res.send(result);
           }
         }
         console.log('vote saved!');

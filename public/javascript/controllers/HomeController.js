@@ -51,17 +51,16 @@
           for(var i = 0; i < post.upVoters.length; i++){
             if(post.upVoters[i] == UserFactory.status._id){
               console.log('already voted!');
-              $scope.openToast = function($event) {
-                $mdToast.show($mdToast.simple().textContent('Hello!'));
-              }
             }
             else if((i+1) >= post.upVoters.length){
               for(var i = 0; i < post.downVoters.length; i++){
                 if(post.downVoters[i] == UserFactory.status._id){
+                  post.downVoters.splice(i, 1);
                   post.rating++;
                 }
               }
               HomeFactory.upVote(post._id).then(function(res) {
+                post.upVoters.push(UserFactory.status._id);
                 post.rating++;
               });
             }
@@ -76,10 +75,12 @@
             else if((i+1) >= post.downVoters.length){
               for(var i = 0; i < post.upVoters.length; i++){
                 if(post.upVoters[i] == UserFactory.status._id){
+                  post.upVoters.splice(i, 1);
                   post.rating--;
                 }
               }
               HomeFactory.downVote(post._id).then(function(res) {
+                post.downVoters.push(UserFactory.status._id);
                 post.rating--;
               });
             }
