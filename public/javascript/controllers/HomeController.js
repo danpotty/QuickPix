@@ -47,13 +47,15 @@
         //------------------------------------------------------
 
         vm.upVote = function(post) {
-            HomeFactory.upVote(post._id);
-            post.rating++;
+            HomeFactory.upVote(post._id).then(function(res) {
+              post.rating++;
+            });
         };
 
         vm.downVote = function(post) {
-            HomeFactory.downVote(post._id);
-            post.rating--;
+            HomeFactory.downVote(post._id).then(function(res) {
+              post.rating--;
+            });
         };
     };
 })();

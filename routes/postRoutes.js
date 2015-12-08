@@ -22,23 +22,20 @@ router.get('/', (req, res, next) => {
 });
 
 router.post("/", auth, (req, res, next) => {
-    let post = new Post(req.body);
-    post.createdBy = req.payload._id;
-    post.save((err, result) => {
-        if (err) return next(err);
-        if (!result) return next("Could not create post");
-        User.update({
-            _id: req.payload._id
-        }, {
-            $push: {
-                posts: result._id
-            }
-        }, (err, user) => {
-            if (err) return next(err);
-            if (!user) return next("Could not push post into user");
-            res.send(result);
-        });
-    });
+	let post = new Post(req.body);
+	post.createdBy = req.payload._id;
+  post.upVoters.push('init');
+  post.downVoters.push('init');
+  // post.rating++;
+	post.save((err, result) => {
+		if(err) return next(err);
+		if(!result) return next("Could not create post");
+		User.update({ _id : req.payload._id }, { $push: { posts : result._id }}, (err, user) => {
+			if(err) return next(err);
+			if(!user) return next("Could not push post into user");
+			res.send(result);
+		});
+	});
 });
 
 router.delete("/:id", (req, res, next) => {
@@ -67,39 +64,51 @@ router.put("/:id", (req, res, next) => {
     });
 });
 
-// router.put('/:id/pic', auth, function(req, res, next) {
-//     console.log(req.body.url);
-//     User.update({
-//             _id: req.params.id
-//         }, {
-//             profilePic: req.body.url,
-//         },
-//         function(err, result) {
-//             if (err) return next(err);
-//             if (!result) return next("Could not create the object. Please check all fields.");
-//             console.log(result, "result");
-//             res.send(result);
-//         });
-// });
-
-router.put("/upvote/:id", (req, res, next) => {
-    Post.findOne({
-        _id: req.params.id
-    }).exec((err, result) => {
+router.put("/upvote/:id", auth, (req, res, next) => {
+  Post.findOne({ _id : req.params.id }).exec((err, result) => {
+    console.log(result.upVoters.length);
+    for (var i = 0; i < result.upVoters.length; i++){
+      if(result.upVoters[i] == req.payload._id){
+        console.log('already voted');
+        return res.send(result);
+      }
+      else if((i+1) >= result.upVoters.length){
+        result.upVoters.push(req.payload._id);
         result.rating++;
         result.save();
-        res.send(result);
-    });
+        for (var i = 0; i <result.downVoters.length; i++){
+          if(result.downVoters[i] == req.payload._id){
+            result.downVoters.splice(i, 1);
+          }
+        }
+        console.log('vote saved!');
+        return res.send(result);
+      }
+    }
+  });
 });
 
-router.put("/downvote/:id", (req, res, next) => {
-    Post.findOne({
-        _id: req.params.id
-    }).exec((err, result) => {
+router.put("/downvote/:id", auth, (req, res, next) => {
+  Post.findOne({ _id : req.params.id }).exec((err, result) => {
+    for (var i = 0; i < result.downVoters.length; i++){
+      if(result.downVoters[i] == req.payload._id){
+        console.log('already voted');
+        return res.send(result);
+      }
+      else if((i+1 >= result.downVoters.length)){
+        result.downVoters.push(req.payload._id);
         result.rating--;
         result.save();
-        res.send(result);
-    });
+        for (var i = 0; i <result.upVoters.length; i++){
+          if(result.upVoters[i] == req.payload._id){
+            result.upVoters.splice(i, 1);
+          }
+        }
+        console.log('vote saved!');
+        return res.send(result);
+      }
+    }
+  });
 });
 
 
