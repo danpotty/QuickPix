@@ -4,6 +4,20 @@ let router = express.Router();
 let mongoose = require("mongoose");
 let passport = require("passport");
 let User = mongoose.model("User");
+let Post = mongoose.model("Post");
+let jwt = require('express-jwt');
+let auth = jwt({
+  userProperty: 'payload',
+  secret: 'hiskett & sons'
+});
+
+router.get("/profile/", auth, (req, res, next) => {
+	Post.find({ createdBy : req.payload._id })
+	.exec((err, result) => {
+		if(err) return next(err);
+		res.send(result);
+	});
+});
 
 router.post("/register", (req, res, next) => {
 	if(!req.body.email || !req.body.password) return next("Please include an email and password");

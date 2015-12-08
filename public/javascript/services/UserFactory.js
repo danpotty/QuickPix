@@ -25,6 +25,14 @@
       return q.promise;
     };
 
+    o.getProfilePosts = function(){
+      var q = $q.defer();
+      $http.get("/api/v1/users/profile", { headers : { authorization : "Bearer " + $window.localStorage.getItem("token")}}).then(function(res){
+        q.resolve(res.data);
+      });
+      return q.promise;
+    };
+
     o.getToken = function() {
       return $window.localStorage.getItem('token');
     };
