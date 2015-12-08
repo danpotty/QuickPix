@@ -14,6 +14,7 @@ let auth = jwt({
 router.get('/', (req, res, next) => {
   Post.find({})
     // .populate('image', 'message', 'dateCreated', 'rating', 'createdBy')
+    .populate("createdBy", "username")
     .exec((err, result) => {
       if(err) return next(err);
       res.send(result);
