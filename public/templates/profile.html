@@ -1,17 +1,17 @@
 <div ng-cloak layout layout="column" layout-align="center">
     <md-list layout="row" layout-wrap>
-        <md-list-item class="md-4-line" ng-repeat="x in vm.posts">
+        <md-list-item class="md-4-line" ng-repeat="p in vm.posts">
             <md-content class="md-padding" layout-align="center">
                 <md-card>
                     <md-card-content layout="column" layout-align="space-between">
                         <div>
-                            <img style="width:400px; height: 400px;" ng-src='{{x.image}}' />
-                            <p><i>{{x.message}}</i></p>
-                            <p>{{ x.rating }} enjoyments</p>
+                            <img style="width:400px; height: 400px;" ng-src='{{p.image}}' />
+                            <p><i>{{p.message}}</i></p>
+                            <p>{{ p.rating }} enjoyments</p>
                         </div>
                         <div>
-                            <md-button class="smallButt" ng-click="vm.startEdit(x)"><span class="glyphicon glyphicon-edit"></span></md-button>
-                            <md-button class="smallButt" ng-click="vm.deletePost(x)"><span class="glyphicon glyphicon-trash"></span></md-button>
+                            <md-button class="smallButt" ng-click="vm.openProfileModal($event, p)"><span class="glyphicon glyphicon-edit"></span></md-button>
+                            <md-button class="smallButt" ng-click="vm.deletePost(p)"><span class="glyphicon glyphicon-trash"></span></md-button>
                         </div>
                     </md-card-content>
                 </md-card>

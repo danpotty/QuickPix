@@ -35,9 +35,8 @@
         };
 
         o.updatePost = function(newPost, oldPost) {
-            var obj = newPost;
             var q = $q.defer();
-            $http.put("/api/v1/posts/" + oldPost._id, obj).then(function(res) {
+            $http.put("/api/v1/posts/" + oldPost._id, newPost).then(function(res) {
                 q.resolve(res.data);
             });
             return q.promise;
