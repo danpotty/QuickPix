@@ -19,5 +19,10 @@
         vm.comment = "";
       });
     };
+
+    vm.deleteComment = function(comment){
+      vm.post.comments.splice(vm.post.comments.indexOf(comment), 1);
+      CommentFactory.deleteComment(comment._id);
+    };
   };
 })();

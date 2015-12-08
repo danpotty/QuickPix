@@ -22,6 +22,14 @@
       return q.promise;
     };
 
+    o.deleteComment = function(id){
+      var q = $q.defer();
+      $http.delete("/api/v1/comments/" + id).then(function(res){
+        q.resolve(res.data);
+      });
+      return q.promise;
+    };
+
     return o;
   };
 })();
