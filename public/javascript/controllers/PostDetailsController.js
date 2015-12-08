@@ -27,10 +27,9 @@
     };
 
     vm.updateComment = function(){
-      console.log(vm.post.comments.indexOf(vm.selectedComment));
       CommentFactory.updateComment(vm.newCommentObj, vm.selectedComment).then(function(res) {
         vm.post.comments[vm.post.comments.indexOf(vm.selectedComment)] = vm.newCommentObj;
-        console.log(vm.newComment);
+        console.log(vm.newCommentObj);
         vm.isEditingC = false;
         vm.selectedComment = null;
         vm.editComment = null;

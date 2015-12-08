@@ -23,10 +23,10 @@
     };
 
     o.updateComment = function(newcom, oldcom) {
-      console.log('factory: new comment:');
-      console.log(newcom);
-      console.log('factory: old comment:');
-      console.log(oldcom);
+      // console.log('factory: new comment:');
+      // console.log(newcom);
+      // console.log('factory: old comment:');
+      // console.log(oldcom);
       var q = $q.defer();
       $http.put('/api/v1/comments/' + oldcom._id, newcom).then(function(res) {
         q.resolve(res.data);
