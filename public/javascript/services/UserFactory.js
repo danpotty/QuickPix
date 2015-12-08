@@ -59,20 +59,7 @@
                 o.status.email = token.email;
                 o.status.username = token.username;
             };
-
-            o.sendpPic = function(pic, id) {
-                var q = $q.defer();
-                $http.put('/api/v1/users/' + id, pic, {
-                        headers: {
-                            authorization: "Bearer " + $window.localStorage.getItem("token")
-                        }
-                      }).then(function(res) {
-                        console.log(res.data + "res.data");
-                        q.resolve(res.data);
-                    });
-                    return q.promise;
-                }
-
+            
                 if (o.getToken()) o.setUser();
 
                 return o;

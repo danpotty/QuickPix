@@ -5,6 +5,7 @@
 
     function HomeController(UserFactory, HomeFactory, $state, $stateParams) {
         var vm = this;
+        vm.post = {};
 
 
         HomeFactory.getAllPosts().then(function(res) {
@@ -17,7 +18,7 @@
                 res.createdBy._id = UserFactory.status._id;
                 res.createdBy.username = UserFactory.status.username;
                 vm.posts.push(res);
-                vm.post = "";
+                vm.post = {};
             });
         };
 
@@ -48,14 +49,40 @@
 
         vm.upVote = function(post) {
             HomeFactory.upVote(post._id).then(function(res) {
-              post.rating++;
+                post.rating++;
             });
         };
 
         vm.downVote = function(post) {
             HomeFactory.downVote(post._id).then(function(res) {
-              post.rating--;
+                post.rating--;
             });
         };
+
+
+        vm.pic = function() {
+            filepicker.setKey("AI7euAQRrqFuwZR6Jg1Zwz");
+            filepicker.pick({
+                mimetype: 'image/*',
+                /* Images only */
+                maxSize: 1024 * 1024 * 5,
+                /* 5mb */
+                imageMax: [1500, 1500],
+                /* 1500x1500px */
+                cropRatio: 1 / 1,
+                /* Perfect squares */
+                services: ['*'] /* All available third-parties */
+            }, function(blob) {
+                var filename = blob.filename;
+                var url = blob.url;
+                var id = blob.id;
+                var isWriteable = blob.isWriteable;
+                var mimetype = blob.mimetype;
+                var size = blob.size;
+                vm.post.image = url;
+            });
+        };
+
+
     };
 })();

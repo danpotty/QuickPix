@@ -22,10 +22,12 @@ router.get('/', (req, res, next) => {
 });
 
 router.post("/", auth, (req, res, next) => {
+  console.log(req.body);
 	let post = new Post(req.body);
 	post.createdBy = req.payload._id;
   post.upVoters.push('init');
   post.downVoters.push('init');
+  post.image = req.body.image;
   // post.rating++;
 	post.save((err, result) => {
 		if(err) return next(err);

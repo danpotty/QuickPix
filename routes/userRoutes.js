@@ -42,17 +42,4 @@ router.post("/login", (req, res, next) => {
 	})(req, res, next);
 });
 
-router.put('/:id', auth, (req, res, next) => {
-    console.log(req.body, "TEST THIS");
-    Post.update({ _id : req.params.id }, {
-            image: req.body.url,
-        },
-        (err, result) => {
-            if (err) return next(err);
-            if (!result) return next("Could not create the object. Please check all fields.");
-            console.log(result, "result ROUTES : 55");
-            res.send(result);
-        });
-});
-
 module.exports = router;
