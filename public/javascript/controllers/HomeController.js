@@ -47,15 +47,39 @@
         //------------------------------------------------------
 
         vm.upVote = function(post) {
-            HomeFactory.upVote(post._id).then(function(res) {
-              post.rating++;
-            });
+          for(var i = 0; i < post.upVoters.length; i++){
+            if(post.upVoters[i] == UserFactory.status._id){
+              console.log('already voted!');
+            }
+            else if((i+1) >= post.upVoters.length){
+              for(var i = 0; i < post.downVoters.length; i++){
+                if(post.downVoters[i] == UserFactory.status._id){
+                  post.rating++;
+                }
+              }
+              HomeFactory.upVote(post._id).then(function(res) {
+                post.rating++;
+              });
+            }
+          }
         };
 
         vm.downVote = function(post) {
-            HomeFactory.downVote(post._id).then(function(res) {
-              post.rating--;
-            });
+          for(var i = 0; i < post.downVoters.length; i++){
+            if(post.downVoters[i] == UserFactory.status._id){
+              console.log('already voted!');
+            }
+            else if((i+1) >= post.downVoters.length){
+              for(var i = 0; i < post.upVoters.length; i++){
+                if(post.upVoters[i] == UserFactory.status._id){
+                  post.rating--;
+                }
+              }
+              HomeFactory.downVote(post._id).then(function(res) {
+                post.rating--;
+              });
+            }
+          }
         };
     };
 })();

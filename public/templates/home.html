@@ -5,7 +5,10 @@
         <form ng-submit="vm.createPost()" ng-show="!vm.isEditing" layout-padding flex>
             <md-input-container flex>
                 <label>Post!</label>
-                <input type="text" ng-model="vm.post.image" />
+                <div layout>
+                    <md-button ng-click="global.pic()">Change Profile Pic</md-button>
+                </div>
+                <!-- <input type="filepicker" data-fp-apikey="{{vm.key}}" onchange="alert(event.fpfile.url)" ng-model="vm.post.image"> -->
             </md-input-container>
             <md-input-container flex>
                 <label>Message!</label>
@@ -28,33 +31,33 @@
     <md-divider />
     <div ng-cloak layout layout="column" layout-align="center">
         <md-list layout="row" layout-wrap>
-            <md-list-item class="md-4-line"  ng-repeat="p in vm.posts">
+            <md-list-item class="md-4-line" ng-repeat="p in vm.posts">
                 <md-content class="md-padding" layout-align="center">
-                        <md-card>
-                            <md-card-content  flex="33" layout="column" layout-align="space-between">
+                    <md-card>
+                        <md-card-content flex="33" layout="column" layout-align="space-between">
+                            <div>
+                                <img style="width:400px; height: 400px;" ui-sref="PostDetails({id: p._id})" ng-src='{{p.image}}' />
+                                <p><i>{{p.message}}</i></p>
+                                <p><i>Posted By: {{p.createdBy.username}}</i></p>
+                            </div>
+                            <div layout="row" ng-show="global.status._id == p.createdBy._id">
+                                <md-button class="smallButt" ng-click="vm.upVote(p)"><span class="glyphicon glyphicon-triangle-top"></span></md-button>
+                                <p>{{ p.rating }}</p>
+                                <md-button class="smallButt" ng-click="vm.downVote(p)"><span class="glyphicon glyphicon-triangle-bottom"></span></md-button>
+                                <span flex></span>
                                 <div>
-                                    <img style="width:400px; height: 400px;" ui-sref="PostDetails({id: p._id})" ng-src='{{p.image}}' />
-                                    <p><i>{{p.message}}</i></p>
-                                    <p><i>Posted By: {{p.createdBy.username}}</i></p>
+                                    <md-button class="smallButt" ng-click="vm.startEdit(p)"><span class="glyphicon glyphicon-edit"></span></md-button>
+                                    <md-button class="smallButt" ng-click="vm.deletePost(p)"><span class="glyphicon glyphicon-trash"></span></md-button>
                                 </div>
+                            </div>
+                            <div ng-show="global.status._id !== p.createdBy._id" layout="row" layout-align="center">
+                                <md-button class="smallButt" ng-click="vm.upVote(p)"><span class="glyphicon glyphicon-triangle-top"></span></md-button>
+                                <p>{{ p.rating }}</p>
+                                <md-button class="smallButt" ng-click="vm.downVote(p)"><span class="glyphicon glyphicon-triangle-bottom"></span></md-button>
+                            </div>
+                        </md-card-content>
+                    </md-card>
 
-                                <div layout="row" ng-show="global.status._id == p.createdBy._id">
-                                    <md-button class="smallButt" ng-click="vm.upVote(p)"><span class="glyphicon glyphicon-triangle-top"></span></md-button>
-                                    <p>{{ p.rating }}</p>
-                                    <md-button class="smallButt" ng-click="vm.downVote(p)"><span class="glyphicon glyphicon-triangle-bottom"></span></md-button>
-                                    <span flex></span>
-                                    <div>
-                                        <md-button class="smallButt" ng-click="vm.startEdit(p)"><span class="glyphicon glyphicon-edit"></span></md-button>
-                                        <md-button class="smallButt" ng-click="vm.deletePost(p)"><span class="glyphicon glyphicon-trash"></span></md-button>
-                                    </div>
-                                </div>
-                                <div ng-show="global.status._id !== p.createdBy._id" layout="row" layout-align="center">
-                                    <md-button class="smallButt" ng-click="vm.upVote(p)"><span class="glyphicon glyphicon-triangle-top"></span></md-button>
-                                    <p>{{ p.rating }}</p>
-                                    <md-button class="smallButt" ng-click="vm.downVote(p)"><span class="glyphicon glyphicon-triangle-bottom"></span></md-button>
-                                </div>
-                            </md-card-content>
-                        </md-card>
                 </md-content>
             </md-list-item>
         </md-list>

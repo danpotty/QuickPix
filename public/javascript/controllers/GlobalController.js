@@ -33,9 +33,40 @@
                 });
         }
 
+
         vm.logout = UserFactory.removeToken;
 
-    }
+
+
+        vm.pic = function() {
+            filepicker.setKey("AI7euAQRrqFuwZR6Jg1Zwz");
+
+            filepicker.pick({
+                mimetype: 'image/*',
+                /* Images only */
+                maxSize: 1024 * 1024 * 5,
+                /* 5mb */
+                imageMax: [1500, 1500],
+                /* 1500x1500px */
+                cropRatio: 1 / 1,
+                /* Perfect squares */
+                services: ['*'] /* All available third-parties */
+            }, function(blob) {
+                var filename = blob.filename;
+                var url = blob.url;
+                var id = blob.id;
+                var isWriteable = blob.isWriteable;
+                var mimetype = blob.mimetype;
+                var size = blob.size;
+
+                UserFactory.sendpPic(blob, vm.status._id).then(function(res) {
+                    console.log(res);
+                    vm.image = res;
+                    $state.go('Home');
+                });
+            });
+        };
+    };
 
     function DialogueController($scope, $mdDialog) {
         $scope.register = function() {
@@ -45,4 +76,6 @@
             $mdDialog.cancel();
         };
     };
+
+
 })();

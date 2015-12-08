@@ -7,18 +7,18 @@ let Comment = mongoose.model('Comment');
 let User = mongoose.model('User');
 let jwt = require('express-jwt');
 let auth = jwt({
-  userProperty: 'payload',
-  secret: 'hiskett & sons'
+    userProperty: 'payload',
+    secret: 'hiskett & sons'
 });
 
 router.get('/', (req, res, next) => {
-  Post.find({})
-    // .populate('image', 'message', 'dateCreated', 'rating', 'createdBy')
-    .populate("createdBy", "username")
-    .exec((err, result) => {
-      if(err) return next(err);
-      res.send(result);
-    });
+    Post.find({})
+        // .populate('image', 'message', 'dateCreated', 'rating', 'createdBy')
+        .populate("createdBy", "username")
+        .exec((err, result) => {
+            if (err) return next(err);
+            res.send(result);
+        });
 });
 
 router.post("/", auth, (req, res, next) => {
@@ -39,21 +39,29 @@ router.post("/", auth, (req, res, next) => {
 });
 
 router.delete("/:id", (req, res, next) => {
-  Post.remove({ _id: req.params.id }, (err, result) => {
-    if(err) return next(err);
-    User.findOneAndUpdate({ "posts" : req.params.id }, { $pull : { posts : req.params.id }}, (err, result) => {
-      if(err) return next(err);
-      res.send(result);
+    Post.remove({
+        _id: req.params.id
+    }, (err, result) => {
+        if (err) return next(err);
+        User.findOneAndUpdate({
+            "posts": req.params.id
+        }, {
+            $pull: {
+                posts: req.params.id
+            }
+        }, (err, result) => {
+            if (err) return next(err);
+            res.send(result);
+        });
     });
-  });
 });
 
 router.put("/:id", (req, res, next) => {
-  Post.update(req.body, function(err, result) {
-    if(err) return next(err);
-    if(!result) return next('Post not found!');
-    res.send(result);
-  });
+    Post.update(req.body, function(err, result) {
+        if (err) return next(err);
+        if (!result) return next('Post not found!');
+        res.send(result);
+    });
 });
 
 router.put("/upvote/:id", auth, (req, res, next) => {
@@ -72,6 +80,9 @@ router.put("/upvote/:id", auth, (req, res, next) => {
           if(result.downVoters[i] == req.payload._id){
             result.downVoters.splice(i, 1);
             result.rating++;
+            result.save();
+            console.log('vote saved!');
+            return res.send(result);
           }
         }
         console.log('vote saved!');
@@ -96,6 +107,7 @@ router.put("/downvote/:id", auth, (req, res, next) => {
           if(result.upVoters[i] == req.payload._id){
             result.upVoters.splice(i, 1);
             result.rating--;
+            result.save();
           }
         }
         console.log('vote saved!');
