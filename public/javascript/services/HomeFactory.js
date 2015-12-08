@@ -74,6 +74,19 @@
             return q.promise;
         };
 
+        //------------------------------------------------------
+        //------------------PHOTO UPLOAD FUNCTIONS-------------------
+        //------------------------------------------------------
+
+    //     o.sendpPic = function(pic, id) {
+    //         var q = $q.defer();
+    //         $http.put('/api/user/' + id + '/pic', pic).then(function(res) {
+    //             console.log(res.data + "res.data");
+    //             q.resolve(res.data);
+    //         });
+    //         return q.promise;
+    //     }
+
         return o;
     }
 })();

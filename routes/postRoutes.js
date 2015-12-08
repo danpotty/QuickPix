@@ -7,66 +7,99 @@ let Comment = mongoose.model('Comment');
 let User = mongoose.model('User');
 let jwt = require('express-jwt');
 let auth = jwt({
-  userProperty: 'payload',
-  secret: 'hiskett & sons'
+    userProperty: 'payload',
+    secret: 'hiskett & sons'
 });
 
 router.get('/', (req, res, next) => {
-  Post.find({})
-    // .populate('image', 'message', 'dateCreated', 'rating', 'createdBy')
-    .populate("createdBy", "username")
-    .exec((err, result) => {
-      if(err) return next(err);
-      res.send(result);
-    });
+    Post.find({})
+        // .populate('image', 'message', 'dateCreated', 'rating', 'createdBy')
+        .populate("createdBy", "username")
+        .exec((err, result) => {
+            if (err) return next(err);
+            res.send(result);
+        });
 });
 
 router.post("/", auth, (req, res, next) => {
-	let post = new Post(req.body);
-	post.createdBy = req.payload._id;
-	post.save((err, result) => {
-		if(err) return next(err);
-		if(!result) return next("Could not create post");
-		User.update({ _id : req.payload._id }, { $push: { posts : result._id }}, (err, user) => {
-			if(err) return next(err);
-			if(!user) return next("Could not push post into user");
-			res.send(result);
-		});
-	});
+    let post = new Post(req.body);
+    post.createdBy = req.payload._id;
+    post.save((err, result) => {
+        if (err) return next(err);
+        if (!result) return next("Could not create post");
+        User.update({
+            _id: req.payload._id
+        }, {
+            $push: {
+                posts: result._id
+            }
+        }, (err, user) => {
+            if (err) return next(err);
+            if (!user) return next("Could not push post into user");
+            res.send(result);
+        });
+    });
 });
 
 router.delete("/:id", (req, res, next) => {
-  Post.remove({ _id: req.params.id }, (err, result) => {
-    if(err) return next(err);
-    User.findOneAndUpdate({ "posts" : req.params.id }, { $pull : { posts : req.params.id }}, (err, result) => {
-      if(err) return next(err);
-      res.send(result);
+    Post.remove({
+        _id: req.params.id
+    }, (err, result) => {
+        if (err) return next(err);
+        User.findOneAndUpdate({
+            "posts": req.params.id
+        }, {
+            $pull: {
+                posts: req.params.id
+            }
+        }, (err, result) => {
+            if (err) return next(err);
+            res.send(result);
+        });
     });
-  });
 });
 
 router.put("/:id", (req, res, next) => {
-  Post.update(req.body, function(err, result) {
-    if(err) return next(err);
-    if(!result) return next('Post not found!');
-    res.send(result);
-  });
+    Post.update(req.body, function(err, result) {
+        if (err) return next(err);
+        if (!result) return next('Post not found!');
+        res.send(result);
+    });
 });
 
+// router.put('/:id/pic', auth, function(req, res, next) {
+//     console.log(req.body.url);
+//     User.update({
+//             _id: req.params.id
+//         }, {
+//             profilePic: req.body.url,
+//         },
+//         function(err, result) {
+//             if (err) return next(err);
+//             if (!result) return next("Could not create the object. Please check all fields.");
+//             console.log(result, "result");
+//             res.send(result);
+//         });
+// });
+
 router.put("/upvote/:id", (req, res, next) => {
-  Post.findOne({ _id : req.params.id }).exec((err, result) => {
-    result.rating++;
-    result.save();
-    res.send(result);
-  });
+    Post.findOne({
+        _id: req.params.id
+    }).exec((err, result) => {
+        result.rating++;
+        result.save();
+        res.send(result);
+    });
 });
 
 router.put("/downvote/:id", (req, res, next) => {
-  Post.findOne({ _id : req.params.id }).exec((err, result) => {
-    result.rating--;
-    result.save();
-    res.send(result);
-  });
+    Post.findOne({
+        _id: req.params.id
+    }).exec((err, result) => {
+        result.rating--;
+        result.save();
+        res.send(result);
+    });
 });
 
 
