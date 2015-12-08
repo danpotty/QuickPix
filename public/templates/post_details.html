@@ -1,49 +1,3 @@
-<!-- <h1>Post</h1>
-<div layout="column" ng-show="global.status._id">
-    <br>
-    <form ng-submit="vm.createComment(); comment=''" ng-show="!vm.isEditingC" layout-padding flex>
-        <md-input-container flex>
-            <label>Comment</label>
-            <input type="text" ng-model="vm.comment.message" />
-        </md-input-container>
-        <md-button type="submit" flex>Submit</md-button>
-    </form>
-    <form ng-submit="vm.updateComment()" ng-show="vm.isEditingC" layout-padding flex>
-        <md-input-container>
-            <label>Comment</label>
-            <input type="text" ng-model="vm.editComment" />
-        </md-input-container>
-        <md-button type="submit" flex>Submit</md-button>
-    </form>
-</div>
-
-<div ng-cloak layout layout="column" layout-align="center">
-    <md-list>
-        <md-list-item class="md-4-line">
-            <md-content class="md-padding" layout="row" layout-wrap layout-align="center">
-                <div flex layout="row">
-                    <md-card>
-                        <md-card-content layout="row" layout-align="space-between">
-                            <div class="md-media-xl card-media">
-                              <img ng-src='{{vm.post.image}}' />
-                              <p><i>{{vm.post.message}}</i></p>
-                            </div>
-
-                            <div>
-                                <p ng-repeat="c in vm.post.comments"> {{c.message}}</p>
-                            </div>
-
-
-
-                            <md-card-actions layout="row">
-                            </md-card-actions>
-                        </md-card-content>
-                    </md-card>
-                </div>
-            </md-content>
-        </md-list-item>
-    </md-list>
-</div> -->
 <h1>Post</h1>
 <div layout="column" ng-show="global.status._id">
     <br>
@@ -57,7 +11,7 @@
     <form ng-submit="vm.updateComment()" ng-show="vm.isEditingC" layout-padding flex>
         <md-input-container>
             <label>Comment</label>
-            <input type="text" ng-model="vm.newComment" />
+            <input type="text" ng-model="vm.newCommentObj.message" />
         </md-input-container>
         <md-button type="submit" flex>Submit</md-button>
     </form>
@@ -68,7 +22,7 @@
 <div ng-cloak layout layout="column" layout-align="center">
     <md-content class="md-padding" layout="row" layout-wrap layout-align="center">
         <div flex layout="row">
-            <md-card>
+            <md-card style="height: 65vh;">
                 <md-card-content layout="row" layout-align="space-between">
                     <div class="md-media-xl card-media">
                         <img ng-src='{{vm.post.image}}' />
@@ -77,12 +31,12 @@
                 </md-card-content>
             </md-card>
 
-            <md-card>
-                <md-card-content layout="column">
+            <md-card style="height: 65vh;">
+                <md-card-content style="overflow-y: auto;" layout="column">
                     <div ng-repeat="c in vm.post.comments">
                         <p> {{c.message}}</p>
-                        <md-button ng-click="vm.startEdit(c);">EDIT THIS MOTHERFUCKING COMMENT</md-button>
-                        <md-button>DELETE THIS MOTHERFUCKING COMMENT</md-button>
+                        <md-button ng-click="vm.startEditC(c);">EDIT</md-button>
+                        <md-button ng-click="vm.deleteComment(c)">DELETE</md-button>
                     </div>
                 </md-card-content>
             </md-card>

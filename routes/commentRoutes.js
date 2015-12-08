@@ -47,4 +47,14 @@ router.put("/:id", (req, res, next) => {
   });
 });
 
+router.delete("/:id", (req, res, next) => {
+	Comment.remove({ _id : req.params.id }, (err, result) => {
+		if(err) return next(err);
+		Post.findOneAndUpdate({ "comments" : req.params.id }, { $pull : { comments : req.params.id }}, (err, result) => {
+			if(err) return next(err);
+			res.send(result);
+		});
+	});
+});
+
 module.exports = router;

@@ -20,20 +20,26 @@
       });
     };
 
-    vm.startEdit = function(comment){
+    vm.startEditC = function(comment){
       vm.isEditingC = true;
       vm.selectedComment = comment;
-      vm.newComment = angular.copy(comment.message);
+      vm.newCommentObj = angular.copy(comment);
     };
 
     vm.updateComment = function(){
-      CommentFactory.updateComment(vm.newComment, vm.selectedComment).then(function(res) {
-        vm.comments[vm.comments.indexOf(vm.selectedComment)] = vm.editComment;
-        console.log(vm.editComment);
+      console.log(vm.post.comments.indexOf(vm.selectedComment));
+      CommentFactory.updateComment(vm.newCommentObj, vm.selectedComment).then(function(res) {
+        vm.post.comments[vm.post.comments.indexOf(vm.selectedComment)] = vm.newCommentObj;
+        console.log(vm.newComment);
         vm.isEditingC = false;
         vm.selectedComment = null;
         vm.editComment = null;
       });
+    };
+
+    vm.deleteComment = function(comment){
+      vm.post.comments.splice(vm.post.comments.indexOf(comment), 1);
+      CommentFactory.deleteComment(comment._id);
     };
 
   };
