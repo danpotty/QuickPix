@@ -27,27 +27,27 @@
     </div>
     <md-divider />
     <div ng-cloak layout layout="column" layout-align="center">
-        <md-list>
-            <md-list-item class="md-4-line" ng-repeat="p in vm.posts">
-                <md-content class="md-padding" layout="row" layout-wrap layout-align="center">
-                    <div flex layout="row">
+        <md-list layout="row" layout-wrap>
+            <md-list-item class="md-4-line" flex="33" ng-repeat="p in vm.posts">
+                <md-content class="md-padding" layout-align="center">
+                    <div>
                         <md-card>
                             <md-card-content layout="column" layout-align="space-between">
-                                <div class="md-media-xl card-media">
-                                    <img ui-sref="PostDetails({id: p._id})" ng-src='{{p.image}}' />
+                                <div>
+                                    <img style="width: 100%; height: 50vh;" ui-sref="PostDetails({id: p._id})" ng-src='{{p.image}}' />
                                     <p><i>{{p.message}}</i></p>
                                 </div>
                                 <div layout="row">
                                     <div layout="row">
                                         <div layout="row">
-                                            <md-button ng-click="vm.upVote(p)">UP</md-button>
+                                            <md-button ng-click="vm.upVote(p)"><span class="glyphicon glyphicon-triangle-top"></span></md-button>
                                             <p>{{ p.rating }}</p>
-                                            <md-button ng-click="vm.downVote(p)">DOWN</md-button>
+                                            <md-button ng-click="vm.downVote(p)"><span class="glyphicon glyphicon-triangle-bottom"></span></md-button>
                                         </div>
                                         <span flex></span>
                                         <div layout="row" layout-align="end center">
-                                            <md-button class="editButton" ng-click="vm.startEdit(p)">Edit</md-button>
-                                            <md-button class="editButton" ng-click="vm.deletePost(p)">Delete</md-button>
+                                            <md-button ng-click="vm.startEdit(p)"><span class="glyphicon glyphicon-edit"></span></md-button>
+                                            <md-button ng-click="vm.deletePost(p)"><span class="glyphicon glyphicon-trash"></span></md-button>
                                         </div>
                                     </div>
                             </md-card-content>

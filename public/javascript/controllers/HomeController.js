@@ -16,6 +16,7 @@
                 res.createdBy = {};
                 res.createdBy._id = UserFactory.status._id;
                 res.createdBy.username = UserFactory.status.username;
+                vm.posts.push(res);
                 vm.post = "";
             });
         };
