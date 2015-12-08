@@ -58,17 +58,25 @@
         //------------------------------------------------------
 
 
-        o.upVote = function(postId, voterId) {
+        o.upVote = function(postId) {
             var q = $q.defer();
-            $http.put("/api/v1/posts/upvote/" + postId).then(function(res) {
+            $http.put("/api/v1/posts/upvote/" + postId, null, {
+                headers: {
+                    authorization: "Bearer " + $window.localStorage.getItem("token")
+                }
+            }).then(function(res) {
                 q.resolve(res.data);
             });
             return q.promise;
         };
 
-        o.downVote = function(postId, voterId) {
+        o.downVote = function(postId) {
             var q = $q.defer();
-            $http.put("/api/v1/posts/downvote/" + postId).then(function(res) {
+            $http.put("/api/v1/posts/downvote/" + postId, null, {
+                headers: {
+                    authorization: "Bearer " + $window.localStorage.getItem("token")
+                }
+            }).then(function(res) {
                 q.resolve(res.data);
             });
             return q.promise;

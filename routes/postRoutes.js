@@ -14,6 +14,7 @@ let auth = jwt({
 router.get('/', (req, res, next) => {
   Post.find({})
     // .populate('image', 'message', 'dateCreated', 'rating', 'createdBy')
+    .populate("createdBy", "username")
     .exec((err, result) => {
       if(err) return next(err);
       res.send(result);
@@ -52,22 +53,29 @@ router.put("/:id", (req, res, next) => {
   });
 });
 
-router.put("/upvote/:id", (req, res, next) => {
-  console.log(req.params.id);
+router.put("/upvote/:id", auth, (req, res, next) => {
   Post.findOne({ _id : req.params.id }).exec((err, result) => {
-    result.voters.push(req.params.id);
-    result.rating++;
-    result.save();
-    res.send(result);
+    for (var i = 0; i < result.voters.length; i++){
+      if(result.voters[i] !== req.payload._id && (i+1) >= result.voters.length){
+        result.voters.push(req.payload._id);
+        result.rating++;
+        result.save();
+        res.send(result);
+      } else console.log('already voted');
+    }
   });
 });
 
-router.put("/downvote/:id", (req, res, next) => {
+router.put("/downvote/:id", auth, (req, res, next) => {
   Post.findOne({ _id : req.params.id }).exec((err, result) => {
-    result.voters.push(req.params.id);
-    result.rating--;
-    result.save();
-    res.send(result);
+    for (var i = 0; i < result.voters.length; i++){
+      if(result.voters[i] !== req.payload._id && (i+1) >= result.voters.length){
+        result.voters.push(req.payload._id);
+        result.rating--;
+        result.save();
+        res.send(result);
+      } else console.log('already voted');
+    }
   });
 });
 

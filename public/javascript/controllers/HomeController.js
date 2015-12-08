@@ -46,14 +46,16 @@
         //------------------RATING FUNCTIONS-------------------
         //------------------------------------------------------
 
-        vm.upVote = function(post, voterId) {
-            HomeFactory.upVote(post._id, voterId);
-            post.rating++;
+        vm.upVote = function(post) {
+            HomeFactory.upVote(post._id).then(function(res) {
+              post.rating++;
+            });
         };
 
-        vm.downVote = function(post, voterId) {
-            HomeFactory.downVote(post._id, voterId);
-            post.rating--;
+        vm.downVote = function(post) {
+            HomeFactory.downVote(post._id).then(function(res) {
+              post.rating--;
+            });
         };
     };
 })();
