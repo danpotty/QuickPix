@@ -66,7 +66,7 @@
         });
     }
 
-    vm.saveToast = function() {
+    $scope.saveToast = function() {
       $mdToast.show(
         $mdToast.simple()
         .textContent('Rating Saved!')
@@ -86,6 +86,12 @@
     vm.upVote = function(post) {
       for (var i = 0; i < post.upVoters.length; i++) {
         if (post.upVoters[i] == UserFactory.status._id) {
+          $mdToast.show(
+      $mdToast.simple()
+      .content('Error getting animals')
+      .position('top right')
+      .hideDelay(2250)
+    );
           vm.repeatToast();
           console.log('already voted! (controller 55)');
           return
@@ -104,7 +110,7 @@
               HomeFactory.upVote(post._id).then(function(res) {
                 post.upVoters.push(UserFactory.status._id);
                 post.rating++;
-                vm.saveToast();
+                saveToast();
                 console.log('vote saved!');
                 return
               });
@@ -133,7 +139,7 @@
               else if ((u + 1) >= post.upVoters.length){
                 post.downVoters.push(UserFactory.status._id);
                 post.rating--;
-                vm.saveToast();
+                saveToast();
                 console.log('vote saved!');
                 return
               }
