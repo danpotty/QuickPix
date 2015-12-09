@@ -6,6 +6,10 @@
     function HomeFactory($http, $q, $window) {
         var o = {};
 
+        //------------------------------------------------------
+        //------------------POST FUNCTIONS-------------------
+        //------------------------------------------------------
+
         o.getAllPosts = function() {
             var q = $q.defer();
             $http.get("/api/v1/posts").then(function(res) {

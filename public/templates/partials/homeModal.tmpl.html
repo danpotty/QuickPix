@@ -1,0 +1,28 @@
+<md-dialog style="width: 75%; text-align:center !important;" ng-cloak>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <span flex></span>
+            <h2>Edit</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">&times;</md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <md-content style="background-color: white !important">
+                <form ng-submit="updateProf()" layout-padding flex>
+                    <md-input-container>
+                        <label>Post!</label>
+                        <input type="text" ng-model="post.image" />
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Message!</label>
+                        <input type="text" ng-model="post.message" />
+                    </md-input-container>
+                    <md-button type="submit" flex>Submit</md-button>
+                </form>
+            </md-content>
+        </div>
+    </md-dialog-content>
+</md-dialog>
