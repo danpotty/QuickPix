@@ -35,12 +35,22 @@
                 <md-card-content style="overflow-y: auto;" layout="column">
                     <div ng-repeat="c in vm.post.comments">
                         <p> {{c.message}}</p>
-
-                        <div layout>
+                        <div layout ng-show="global.status._id == c.user">
                             <span flex></span>
                             <md-button class="smallButt" ng-click="vm.startEditC(c);"><span class="glyphicon glyphicon-edit"></span></md-button>
                             <md-button class="smallButt" ng-click="vm.deleteComment(c)"><span class="glyphicon glyphicon-trash"></span></md-button>
-                        </div>    
+                        </div>
+
+                        <div layout ng-show="global.status._id == c.post.createdBy">
+                            <span flex></span>
+                                <md-button class="smallButt" ng-click="vm.deleteComment(c)"><span class="glyphicon glyphicon-trash"></span></md-button>
+                        </div>
+                        
+                        <!-- <div layout >
+                            <span flex></span>
+                            <md-button class="smallButt" ng-click="vm.startEditC(c);"><span class="glyphicon glyphicon-edit"></span></md-button>
+                            <md-button class="smallButt" ng-click="vm.deleteComment(c)"><span class="glyphicon glyphicon-trash"></span></md-button>
+                        </div>    --> 
                     </div>
                 </md-card-content>
             </md-card>
