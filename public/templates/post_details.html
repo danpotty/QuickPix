@@ -20,18 +20,18 @@
 <!-- CARDS && LAYOUTS -->
 
 <div ng-cloak layout layout="column" layout-align="center">
-    <md-content class="md-padding" layout="row" layout-wrap layout-align="center">
-        <div flex layout="row">
-            <md-card style="height: 65vh;" flex="50">
-                <md-card-content style="height: 100%;" layout="column" layout-align="space-between">
+    <md-content class="md-padding" layout="row" layout-align="center">
+        <div flex layout-align="center" layout="row">
+            <md-card>
+                <md-card-content layout="column" layout-align="space-between">
                     
-                        <img style="width: 100%; height: 90%;" ng-src='{{vm.post.image}}' />
+                        <img style="width: 400px; height: 400px;" ng-src='{{vm.post.image}}' />
                         <p><i>{{vm.post.message}}</i></p>
                    
                 </md-card-content>
             </md-card>
 
-            <md-card style="height: 65vh;" flex="50">
+            <md-card style="height: 400px;" flex="50">
                 <md-card-content style="overflow-y: auto;" layout="column">
                     <div ng-repeat="c in vm.post.comments">
                         <p> {{c.message}}</p>
