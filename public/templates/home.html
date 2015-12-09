@@ -5,7 +5,7 @@
         <form ng-submit="vm.createPost()" ng-show="!vm.isEditing" layout-padding flex>
             <md-input-container layout="row">
                 <div>
-                    <md-button type="button" ng-click="vm.pic()">Click to Upload an Image &nbsp; <span class="glyphicon glyphicon-picture"></span></md-button>
+                    <md-button type="button" ng-click="vm.pic()">Click to Upload an Image &nbsp; <span class="glyphicon glyphicon-picture"></span></md-button><span ng-show="vm.preview" class="glyphicon glyphicon-ok"></span>
                 </div>
             </md-input-container>
             <md-input-container flex>
