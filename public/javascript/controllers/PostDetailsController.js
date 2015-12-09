@@ -34,10 +34,6 @@
             });
         };
 
-        vm.cancelEdit = function() {
-          vm.isEditingC = false;
-        }
-
         vm.deleteComment = function(comment) {
           if(vm.isEditingC){
             vm.newCommentObj.message = null;
