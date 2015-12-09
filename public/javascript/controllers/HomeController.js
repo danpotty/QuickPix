@@ -9,7 +9,6 @@
         vm.post = {};
         vm.preview = false;
 
-
         HomeFactory.getAllPosts().then(function(res) {
             vm.posts = res;
         });
@@ -21,7 +20,7 @@
                 res.createdBy.username = UserFactory.status.username;
                 vm.posts.push(res);
                 vm.post = {};
-                // vm.preview = false;
+                vm.preview = false;
             });
         };
 
@@ -51,43 +50,41 @@
         //------------------------------------------------------
 
         vm.upVote = function(post) {
-          for(var i = 0; i < post.upVoters.length; i++){
-            if(post.upVoters[i] == UserFactory.status._id){
-              console.log('already voted!');
-            }
-            else if((i+1) >= post.upVoters.length){
-              for(var i = 0; i < post.downVoters.length; i++){
-                if(post.downVoters[i] == UserFactory.status._id){
-                  post.downVoters.splice(i, 1);
-                  post.rating++;
+            for (var i = 0; i < post.upVoters.length; i++) {
+                if (post.upVoters[i] == UserFactory.status._id) {
+                    console.log('already voted!');
+                } else if ((i + 1) >= post.upVoters.length) {
+                    for (var i = 0; i < post.downVoters.length; i++) {
+                        if (post.downVoters[i] == UserFactory.status._id) {
+                            post.downVoters.splice(i, 1);
+                            post.rating++;
+                        }
+                    }
+                    HomeFactory.upVote(post._id).then(function(res) {
+                        post.upVoters.push(UserFactory.status._id);
+                        post.rating++;
+                    });
                 }
-              }
-              HomeFactory.upVote(post._id).then(function(res) {
-                post.upVoters.push(UserFactory.status._id);
-                post.rating++;
-              });
             }
-          }
         };
 
         vm.downVote = function(post) {
-          for(var i = 0; i < post.downVoters.length; i++){
-            if(post.downVoters[i] == UserFactory.status._id){
-              console.log('already voted!');
-            }
-            else if((i+1) >= post.downVoters.length){
-              for(var i = 0; i < post.upVoters.length; i++){
-                if(post.upVoters[i] == UserFactory.status._id){
-                  post.upVoters.splice(i, 1);
-                  post.rating--;
+            for (var i = 0; i < post.downVoters.length; i++) {
+                if (post.downVoters[i] == UserFactory.status._id) {
+                    console.log('already voted!');
+                } else if ((i + 1) >= post.downVoters.length) {
+                    for (var i = 0; i < post.upVoters.length; i++) {
+                        if (post.upVoters[i] == UserFactory.status._id) {
+                            post.upVoters.splice(i, 1);
+                            post.rating--;
+                        }
+                    }
+                    HomeFactory.downVote(post._id).then(function(res) {
+                        post.downVoters.push(UserFactory.status._id);
+                        post.rating--;
+                    });
                 }
-              }
-              HomeFactory.downVote(post._id).then(function(res) {
-                post.downVoters.push(UserFactory.status._id);
-                post.rating--;
-              });
             }
-          }
         };
 
         //------------------------------------------------------
@@ -115,16 +112,15 @@
                 var mimetype = blob.mimetype;
                 var size = blob.size;
                 vm.post.image = url;
+                vm.post.message = "";
 
-                if(blob !== null){
-                  vm.preview = true;
-               };
-               vm.post.message = " ";
+                if (blob) {
+                    $scope.$apply(function() {
+                        vm.preview = true;
+                    });
+                    console.log(vm.preview);
                 };
             });
-
-
-
         };
 
         vm.openHomeModal = function(ev, post) {
@@ -134,7 +130,9 @@
                     parent: angular.element(document.body),
                     targetEvent: ev,
                     clickOutsideToClose: true,
-                    locals : {post:post }
+                    locals: {
+                        post: post
+                    }
 
                 })
                 .then(function(newPost) {
@@ -146,11 +144,12 @@
         };
 
     };
-        //------------------------------------------------------
-        //------------------EDIT MODAL FUNCTIONS-------------------
-        //------------------------------------------------------
+    
+    //------------------------------------------------------
+    //------------------EDIT MODAL FUNCTIONS-------------------
+    //------------------------------------------------------
 
-        function HomeDialogueController($scope, $mdDialog, post) {
+    function HomeDialogueController($scope, $mdDialog, post) {
         $scope.post = angular.copy(post);
         $scope.updateProf = function() {
             $mdDialog.hide($scope.post);
