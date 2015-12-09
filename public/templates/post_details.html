@@ -20,7 +20,7 @@
 <!-- CARDS && LAYOUTS -->
 
 <div ng-cloak layout layout="column" layout-align="center">
-    <md-content class="md-padding" layout="row" layout-align="center">
+    <md-content style="width: 100%;" class="md-padding" layout="row" layout-align="center">
         <div flex layout-align="center" layout="row">
             <md-card>
                 <md-card-content layout="column" layout-align="space-between">
@@ -31,7 +31,7 @@
                 </md-card-content>
             </md-card>
 
-            <md-card style="height: 400px;" flex="50">
+            <md-card style="height: 482px;" flex="50">
                 <md-card-content style="overflow-y: auto;" layout="column">
                     <div ng-repeat="c in vm.post.comments">
                         <p> {{c.message}}</p>
