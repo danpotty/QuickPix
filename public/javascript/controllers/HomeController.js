@@ -1,9 +1,10 @@
 (function() {
     'use strict';
     angular.module('app')
-        .controller('HomeController', HomeController);
+        .controller('HomeController', HomeController)
+        .controller("HomeDialogueController", HomeDialogueController)
 
-    function HomeController(UserFactory, HomeFactory, $state, $stateParams, $scope) {
+    function HomeController(UserFactory, HomeFactory, $state, $stateParams, $scope, $mdDialog) {
         var vm = this;
         vm.post = {};
         vm.preview = false;
@@ -89,9 +90,13 @@
           }
         };
 
+        //------------------------------------------------------
+        //------------------FILE PICKER FUNCTIONS-------------------
+        //------------------------------------------------------
+
 
         vm.pic = function() {
-            vm.preview = true;
+            
             filepicker.setKey("AI7euAQRrqFuwZR6Jg1Zwz");
             filepicker.pick({
                 mimetype: 'image/*',
@@ -111,7 +116,46 @@
                 var mimetype = blob.mimetype;
                 var size = blob.size;
                 vm.post.image = url;
+
+                if(blob !== null){
+                vm.preview = true;  
+                };
             });
         };
+
+        vm.openHomeModal = function(ev, post) {
+            $mdDialog.show({
+                    controller: HomeDialogueController,
+                    templateUrl: '/templates/partials/HomeModal.tmpl.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose: true,
+                    locals : {post:post }
+
+                })
+                .then(function(newPost) {
+                    HomeFactory.updatePost(newPost, post).then(function(res) {
+                        vm.posts[vm.posts.indexOf(post)] = newPost;
+                    });
+
+                });
+        };
+
+    };
+        //------------------------------------------------------
+        //------------------EDIT MODAL FUNCTIONS-------------------
+        //------------------------------------------------------
+
+        function HomeDialogueController($scope, $mdDialog, post) {
+        $scope.post = angular.copy(post);
+        $scope.updateProf = function() {
+            $mdDialog.hide($scope.post);
+        };
+
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+    
+
     };
 })();
