@@ -22,9 +22,9 @@ md-toolbar{
 }
 
 md-toast{
+	font-size: 20px;
 	position: fixed !important;
-	top: 5;
-	right: 5;
+	background-color: rgba(47, 92, 35, 0.8);
 }
 
 
