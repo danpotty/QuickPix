@@ -4,7 +4,7 @@
         .controller('PostDetailsController', PostDetailsController)
         .controller("CommentsDialogueController", CommentsDialogueController)
 
-    function PostDetailsController($state, $stateParams, CommentFactory, UserFactory, $mdDialog) {
+    function PostDetailsController($state, $stateParams, CommentFactory, UserFactory, $mdDialog, $mdToast) {
         var vm = this;
 
         if (!$stateParams.id) $state.go('Home');
@@ -13,10 +13,26 @@
         });
 
         vm.createComment = function() {
+          console.log(vm.comment);
+          if(!vm.comment){
+            $mdToast.show(
+                $mdToast.simple()
+                .content('Please fill in the comment field!')
+                .position('top left')
+                .hideDelay(3000)
+            );
+            return
+          }
             CommentFactory.createComment(vm.post._id, vm.comment).then(function(res) {
                 res.user = UserFactory.status._id;
                 vm.post.comments.push(res);
-                vm.comment = {};
+                vm.comment = null;
+                $mdToast.show(
+                    $mdToast.simple()
+                    .content('Comment posted!')
+                    .position('top left')
+                    .hideDelay(2250)
+                );
             });
         };
 
@@ -41,7 +57,14 @@
                 vm.isEditingC = false;
             }
             vm.post.comments.splice(vm.post.comments.indexOf(comment), 1);
-            CommentFactory.deleteComment(comment._id);
+            CommentFactory.deleteComment(comment._id).then(function(res) {
+              $mdToast.show(
+                  $mdToast.simple()
+                  .content('Comment Deleted!')
+                  .position('top right')
+                  .hideDelay(2250)
+              );
+            });
         };
 
         vm.openCommentModal = function(ev, comment) {

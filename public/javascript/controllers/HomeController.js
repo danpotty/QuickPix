@@ -13,6 +13,14 @@
             vm.posts = res;
         });
         vm.createPost = function() {
+          if(!vm.post.image){
+            $mdToast.show(
+                $mdToast.simple()
+                .content('You must include a photo!')
+                .position('top')
+                .hideDelay(3000)
+            );
+          }
             HomeFactory.createPost(vm.post).then(function(res) {
                 res.createdBy = {};
                 res.createdBy._id = UserFactory.status._id;
@@ -20,11 +28,24 @@
                 vm.posts.push(res);
                 vm.post = {};
                 vm.preview = false;
+                $mdToast.show(
+                    $mdToast.simple()
+                    .content('Photo posted!')
+                    .position('top left')
+                    .hideDelay(2250)
+                );
             });
         };
         vm.deletePost = function(post) {
             vm.posts.splice(vm.posts.indexOf(post), 1);
-            HomeFactory.deletePost(post._id);
+            HomeFactory.deletePost(post._id).then(function(res) {
+              $mdToast.show(
+                  $mdToast.simple()
+                  .content('Photo Deleted!')
+                  .position('top right')
+                  .hideDelay(3000)
+              );
+            });
         };
         vm.startEdit = function(post) {
             vm.isEditing = true;
@@ -48,7 +69,6 @@
                     $mdToast.show(
                         $mdToast.simple()
                         .content('Photo already rated!')
-                        .position('top right')
                         .hideDelay(2250)
                     );
                     // console.log('already voted! (controller 55)');
@@ -61,7 +81,6 @@
                             $mdToast.show(
                                 $mdToast.simple()
                                 .content('Rating Cleared!')
-                                .position('top right')
                                 .hideDelay(2250)
                             );
                             // console.log('votes cleared! (controller 64)');
@@ -74,7 +93,6 @@
                                 $mdToast.show(
                                     $mdToast.simple()
                                     .content('Rating Saved!')
-                                    .position('top right')
                                     .hideDelay(2250)
                                 );
                                 // console.log('vote saved!');
@@ -91,7 +109,6 @@
                     $mdToast.show(
                         $mdToast.simple()
                         .content('Photo already rated!')
-                        .position('top right')
                         .hideDelay(2250)
                     );
                     // console.log('already voted!(controller 76)');
@@ -105,7 +122,6 @@
                                 $mdToast.show(
                                     $mdToast.simple()
                                     .content('Rating Cleared!')
-                                    .position('top right')
                                     .hideDelay(2250)
                                 );
                                 // console.log('votes cleared! (controller 90)');
@@ -116,7 +132,6 @@
                                 $mdToast.show(
                                     $mdToast.simple()
                                     .content('Rating Saved!')
-                                    .position('top right')
                                     .hideDelay(2250)
                                 );
                                 // console.log('vote saved!');
@@ -127,7 +142,7 @@
                 }
             }
         };
-        
+
         //------------------------------------------------------
         //------------------FILE PICKER FUNCTIONS-------------------
         //------------------------------------------------------
