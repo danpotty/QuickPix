@@ -78,12 +78,13 @@ router.put("/upvote/:id", auth, (req, res, next) => {
         result.upVoters.push(req.payload._id);
         result.rating++;
         result.save();
+        console.log('vote saved!');
         for (var i = 0; i <result.downVoters.length; i++){
           if(result.downVoters[i] == req.payload._id){
             result.downVoters.splice(i, 1);
-            result.rating++;
+            result.upVoters.splice(result.upVoters.indexOf(req.payload._id), 1);
             result.save();
-            console.log('vote saved!');
+            console.log('votes cleared!');
             return res.send(result);
           }
         }
@@ -108,9 +109,9 @@ router.put("/downvote/:id", auth, (req, res, next) => {
         for (var i = 0; i <result.upVoters.length; i++){
           if(result.upVoters[i] == req.payload._id){
             result.upVoters.splice(i, 1);
-            result.rating--;
+            result.downVoters.splice(result.downVoters.indexOf(req.payload._id), 1);
             result.save();
-            console.log('vote saved!');
+            console.log('votes cleared!');
             return res.send(result);
           }
         }
