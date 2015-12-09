@@ -46,5 +46,34 @@
         $scope.cancel = function() {
             $mdDialog.cancel();
         };
+
+        $scope.pic = function() {
+            filepicker.setKey("AI7euAQRrqFuwZR6Jg1Zwz");
+            filepicker.pick({
+                mimetype: 'image/*',
+                /* Images only */
+                maxSize: 1024 * 1024 * 5,
+                /* 5mb */
+                imageMax: [1500, 1500],
+                /* 1500x1500px */
+                cropRatio: 1 / 1,
+                /* Perfect squares */
+                services: ['*'] /* All available third-parties */
+            }, function(blob) {
+                var filename = blob.filename;
+                var url = blob.url;
+                var id = blob.id;
+                var isWriteable = blob.isWriteable;
+                var mimetype = blob.mimetype;
+                var size = blob.size;
+                $scope.post.image = url;
+
+                if (blob) {
+                    $scope.$apply(function() {
+                        $scope.preview = true;
+                    });
+                };
+            });
+        };
     };
 })();

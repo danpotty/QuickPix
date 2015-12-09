@@ -14,8 +14,8 @@
 
         vm.createComment = function() {
             CommentFactory.createComment(vm.post._id, vm.comment).then(function(res) {
-                vm.comment.user = UserFactory.status._id;
-                vm.post.comments.push(vm.comment);
+                res.user = UserFactory.status._id;
+                vm.post.comments.push(res);
                 vm.comment = {};
             });
         };
