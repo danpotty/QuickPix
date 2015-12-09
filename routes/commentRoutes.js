@@ -40,7 +40,7 @@ router.post("/:id", auth, (req, res, next) => {
 });
 
 router.put("/:id", (req, res, next) => {
-  console.log(req.body.message);
+  console.log(req.body);
   if(!req.body.message) return next('Please enter a comment');
   Comment.update({ _id : req.params.id }, { message : req.body.message }, function(err, result) {
     if(err) return next(err);

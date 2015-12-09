@@ -2,7 +2,7 @@
     'use strict';
     angular.module('app')
         .controller('ProfileController', ProfileController)
-    .controller("ProfileDialogueController", ProfileDialogueController);
+        .controller("ProfileDialogueController", ProfileDialogueController);
 
     function ProfileController(HomeFactory, UserFactory, $state, $mdDialog) {
         var vm = this;
@@ -11,8 +11,6 @@
             vm.posts = res;
         });
 
-
-
         vm.openProfileModal = function(ev, post) {
             $mdDialog.show({
                     controller: ProfileDialogueController,
@@ -20,23 +18,24 @@
                     parent: angular.element(document.body),
                     targetEvent: ev,
                     clickOutsideToClose: true,
-                    locals : {post:post }
+                    locals: {
+                        post: post
+                    }
 
                 })
                 .then(function(newPost) {
                     HomeFactory.updatePost(newPost, post).then(function(res) {
-                    	vm.posts[vm.posts.indexOf(post)] = newPost;
+                        vm.posts[vm.posts.indexOf(post)] = newPost;
                     });
 
                 });
         }
 
-        vm.deletePost = function(post){
+        vm.deletePost = function(post) {
             vm.posts.splice(vm.posts.indexOf(post), 1);
             HomeFactory.deletePost(post._id);
         };
     };
-
 
     function ProfileDialogueController($scope, $mdDialog, post) {
         $scope.post = angular.copy(post);

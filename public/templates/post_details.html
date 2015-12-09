@@ -8,13 +8,6 @@
         </md-input-container>
         <md-button type="submit" flex>Submit</md-button>
     </form>
-    <form ng-submit="vm.updateComment()" ng-show="vm.isEditingC" layout-padding flex>
-        <md-input-container>
-            <label>Comment</label>
-            <input type="text" ng-model="vm.newCommentObj.message" />
-        </md-input-container>
-        <md-button type="submit" flex>Submit</md-button>
-    </form>
 </div>
 
 <!-- CARDS && LAYOUTS -->
@@ -37,7 +30,7 @@
                         <p> {{c.message}}</p>
                          <div layout >
                             <span flex></span>
-                            <md-button ng-show="global.status._id == c.user" class="smallButt" ng-click="vm.startEditC(c);"><span class="glyphicon glyphicon-edit"></span></md-button>
+                            <md-button ng-show="global.status._id == c.user" class="smallButt" ng-click="vm.openCommentModal($event, c)"><span class="glyphicon glyphicon-edit"></span></md-button>
                             <md-button ng-show="global.status._id == c.user || global.status._id == vm.post.createdBy" class="smallButt" ng-click="vm.deleteComment(c)"><span class="glyphicon glyphicon-trash"></span></md-button>                        
                         </div>
                         <md-divider>
