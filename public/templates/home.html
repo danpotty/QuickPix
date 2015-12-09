@@ -51,9 +51,9 @@
                                 </div>
                             </div>
                             <div ng-show="global.status._id !== p.createdBy._id" layout="row" layout-align="center">
-                                <md-button ng-show="vm.upvote" class="smallButt" ng-click="vm.upVote(p)"><span class="glyphicon glyphicon-triangle-top"></span></md-button>
+                                <md-button class="smallButt" ng-click="vm.upVote(p)"><span class="glyphicon glyphicon-triangle-top"></span></md-button>
                                 <p>{{ p.rating }}</p>
-                                <md-button ng-show="vm.downvote" class="smallButt" ng-click="vm.downVote(p)"><span class="glyphicon glyphicon-triangle-bottom"></span></md-button>
+                                <md-button class="smallButt" ng-click="vm.downVote(p)"><span class="glyphicon glyphicon-triangle-bottom"></span></md-button>
                             </div>
                         </md-card-content>
                     </md-card>

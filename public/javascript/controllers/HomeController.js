@@ -8,8 +8,6 @@
         var vm = this;
         vm.post = {};
         vm.preview = false;
-        vm.upvote = true;
-        vm.downvote = true;
 
         HomeFactory.getAllPosts().then(function(res) {
             vm.posts = res;
@@ -54,8 +52,6 @@
         vm.upVote = function(post) {
             for (var i = 0; i < post.upVoters.length; i++) {
                 if (post.upVoters[i] == UserFactory.status._id) {
-                  vm.upvote = false;
-                  vm.downvote = true;
                   console.log('already voted!');
                 } else if ((i + 1) >= post.upVoters.length) {
                     for (var i = 0; i < post.downVoters.length; i++) {
@@ -67,8 +63,6 @@
                     HomeFactory.upVote(post._id).then(function(res) {
                         post.upVoters.push(UserFactory.status._id);
                         post.rating++;
-                        vm.upvote = false;
-                        vm.downvote = true;
                     });
                 }
             }
@@ -77,8 +71,6 @@
         vm.downVote = function(post) {
             for (var i = 0; i < post.downVoters.length; i++) {
                 if (post.downVoters[i] == UserFactory.status._id) {
-                  vm.downvote = false;
-                  vm.upvote = true;
                   console.log('already voted!');
                 } else if ((i + 1) >= post.downVoters.length) {
                     for (var i = 0; i < post.upVoters.length; i++) {
@@ -90,8 +82,6 @@
                     HomeFactory.downVote(post._id).then(function(res) {
                         post.downVoters.push(UserFactory.status._id);
                         post.rating--;
-                        vm.downvote = false;
-                        vm.upvote = true;
                     });
                 }
             }
