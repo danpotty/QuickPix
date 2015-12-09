@@ -8,9 +8,22 @@
                     <md-button type="button" ng-click="vm.pic()">Click to Upload an Image &nbsp; <span class="glyphicon glyphicon-picture"></span></md-button><span ng-show="vm.preview" class="glyphicon glyphicon-ok"></span>
                 </div>
             </md-input-container>
+
             <md-input-container flex>
                 <label>Enter Your Message</label>
                 <input type="text" ng-model="vm.post.message" />
+            </md-input-container>
+            <md-button type="submit" flex>Submit</md-button>
+        </form>
+
+        <form ng-submit="vm.updatePost()" ng-show="vm.isEditing" layout-padding flex>
+            <md-input-container>
+                <label>Post!</label>
+                <input type="text" ng-model="vm.editPost.image" />
+            </md-input-container>
+            <md-input-container>
+                <label>Message!</label>
+                <input type="text" ng-model="vm.editPost.message" />
             </md-input-container>
             <md-button type="submit" flex>Submit</md-button>
         </form>

@@ -96,7 +96,6 @@
 
 
         vm.pic = function() {
-            
             filepicker.setKey("AI7euAQRrqFuwZR6Jg1Zwz");
             filepicker.pick({
                 mimetype: 'image/*',
@@ -118,9 +117,14 @@
                 vm.post.image = url;
 
                 if(blob !== null){
-                vm.preview = true;  
+                  vm.preview = true;
+               };
+               vm.post.message = " ";
                 };
             });
+
+
+
         };
 
         vm.openHomeModal = function(ev, post) {
@@ -155,7 +159,7 @@
         $scope.cancel = function() {
             $mdDialog.cancel();
         };
-    
+
 
     };
 })();
