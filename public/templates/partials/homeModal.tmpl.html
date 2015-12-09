@@ -12,7 +12,9 @@
             <md-content style="background-color: white !important">
                 <form ng-submit="updateProf()" layout-padding flex>
                     <md-input-container>
-                        <md-button type="button" ng-click="pic()">Click to Change Image &nbsp; <span class="glyphicon glyphicon-picture"></span></md-button><span ng-show="vm.preview" class="glyphicon glyphicon-ok"></span>
+                        <div layout-align="center" layout="row">
+                            <md-button type="button" ng-click="pic()">Click to Change Image &nbsp; <span class="glyphicon glyphicon-picture"></span></md-button><span ng-show="preview" class="glyphicon glyphicon-ok"></span>
+                        </div>
                         <input type="text" ng-model="post.image" />
                     </md-input-container>
 
