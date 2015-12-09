@@ -13,18 +13,6 @@
       vm.posts = res;
     });
 
-    vm.saveToast = function() {
-      $mdToast.showSimple('Vote Saved!');
-    };
-
-    vm.clearToast = function() {
-      $mdToast.showSimple('Vote Cleared!');
-    };
-
-    vm.repeatToast = function() {
-      $mdToast.showSimple('You already voted!');
-    };
-
     vm.createPost = function() {
       HomeFactory.createPost(vm.post).then(function(res) {
         res.createdBy = {};
@@ -60,6 +48,40 @@
     //------------------------------------------------------
     //------------------RATING FUNCTIONS-------------------
     //------------------------------------------------------
+
+    // vm.saveToast = function() {
+    //   $mdToast.show(
+    //     $mdToast.simple()
+    //     .textContent('Rating Saved!')
+    //     .position(top right)
+    //     .hideDelay(2500)
+    //   );
+    // };
+
+    vm.clearToast = function() {
+        $mdToast.show({
+          position: "top right",
+          textContent: "Rating Cleared!",
+          hideDelay: 2500
+        });
+    }
+
+    vm.saveToast = function() {
+      $mdToast.show(
+        $mdToast.simple()
+        .textContent('Rating Saved!')
+        .position('top right')
+        .hideDelay(2500)
+      );
+    };
+
+    // vm.clearToast = function() {
+    //   $mdToast.showSimple('Rating Cleared!');
+    // };
+
+    vm.repeatToast = function() {
+      $mdToast.showSimple('You already rated!');
+    };
 
     vm.upVote = function(post) {
       for (var i = 0; i < post.upVoters.length; i++) {
