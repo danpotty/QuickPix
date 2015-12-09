@@ -62,7 +62,7 @@
               $mdToast.show(
                   $mdToast.simple()
                   .content('Comment Deleted!')
-                  .position('top right')
+                  .position('top left')
                   .hideDelay(2250)
               );
             });

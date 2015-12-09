@@ -17,7 +17,7 @@
             $mdToast.show(
                 $mdToast.simple()
                 .content('You must include a photo!')
-                .position('top')
+                .position('top left')
                 .hideDelay(3000)
             );
           }
@@ -42,7 +42,7 @@
               $mdToast.show(
                   $mdToast.simple()
                   .content('Photo Deleted!')
-                  .position('top right')
+                  .position('top left')
                   .hideDelay(3000)
               );
             });
