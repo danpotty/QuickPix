@@ -49,59 +49,29 @@
     //------------------RATING FUNCTIONS-------------------
     //------------------------------------------------------
 
-    // vm.saveToast = function() {
-    //   $mdToast.show(
-    //     $mdToast.simple()
-    //     .textContent('Rating Saved!')
-    //     .position(top right)
-    //     .hideDelay(2500)
-    //   );
-    // };
-
-    vm.clearToast = function() {
-        $mdToast.show({
-          position: "top right",
-          textContent: "Rating Cleared!",
-          hideDelay: 2500
-        });
-    }
-
-    $scope.saveToast = function() {
-      $mdToast.show(
-        $mdToast.simple()
-        .textContent('Rating Saved!')
-        .position('top right')
-        .hideDelay(2500)
-      );
-    };
-
-    // vm.clearToast = function() {
-    //   $mdToast.showSimple('Rating Cleared!');
-    // };
-
-    vm.repeatToast = function() {
-      $mdToast.showSimple('You already rated!');
-    };
-
     vm.upVote = function(post) {
       for (var i = 0; i < post.upVoters.length; i++) {
         if (post.upVoters[i] == UserFactory.status._id) {
           $mdToast.show(
-      $mdToast.simple()
-      .content('Error getting animals')
-      .position('top right')
-      .hideDelay(2250)
-    );
-          vm.repeatToast();
-          console.log('already voted! (controller 55)');
+            $mdToast.simple()
+            .content('Photo already rated!')
+            .position('top right')
+            .hideDelay(2250)
+          );
+          // console.log('already voted! (controller 55)');
           return
         } else if ((i + 1) >= post.upVoters.length) {
           for (var u = 0; u < post.downVoters.length; u++){
             if(post.downVoters[u] == UserFactory.status._id){
               post.downVoters.splice(u, 1);
               post.rating++;
-              vm.clearToast();
-              console.log('votes cleared! (controller 64)');
+              $mdToast.show(
+                $mdToast.simple()
+                .content('Rating Cleared!')
+                .position('top right')
+                .hideDelay(2250)
+              );
+              // console.log('votes cleared! (controller 64)');
               HomeFactory.upVote(post._id).then(function(res) {
               });
               return
@@ -110,8 +80,13 @@
               HomeFactory.upVote(post._id).then(function(res) {
                 post.upVoters.push(UserFactory.status._id);
                 post.rating++;
-                saveToast();
-                console.log('vote saved!');
+                $mdToast.show(
+                  $mdToast.simple()
+                  .content('Rating Saved!')
+                  .position('top right')
+                  .hideDelay(2250)
+                );
+                // console.log('vote saved!');
                 return
               });
             }
@@ -123,8 +98,13 @@
     vm.downVote = function(post) {
       for (var i = 0; i < post.downVoters.length; i++) {
         if (post.downVoters[i] == UserFactory.status._id) {
-          vm.repeatToast();
-          console.log('already voted!(controller 76)');
+          $mdToast.show(
+            $mdToast.simple()
+            .content('Photo already rated!')
+            .position('top right')
+            .hideDelay(2250)
+          );
+          // console.log('already voted!(controller 76)');
           return
         } else if ((i + 1) >= post.downVoters.length) {
           HomeFactory.downVote(post._id).then(function(res) {
@@ -132,15 +112,25 @@
               if(post.upVoters[u] == UserFactory.status._id){
                 post.upVoters.splice(u, 1);
                 post.rating--;
-                vm.clearToast();
-                console.log('votes cleared! (controller 90)');
+                $mdToast.show(
+                  $mdToast.simple()
+                  .content('Rating Cleared!')
+                  .position('top right')
+                  .hideDelay(2250)
+                );
+                // console.log('votes cleared! (controller 90)');
                 return
               }
               else if ((u + 1) >= post.upVoters.length){
                 post.downVoters.push(UserFactory.status._id);
                 post.rating--;
-                saveToast();
-                console.log('vote saved!');
+                $mdToast.show(
+                  $mdToast.simple()
+                  .content('Rating Saved!')
+                  .position('top right')
+                  .hideDelay(2250)
+                );
+                // console.log('vote saved!');
                 return
               }
             }

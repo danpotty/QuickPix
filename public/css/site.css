@@ -19,3 +19,9 @@ md-toolbar{
 	font-size: 30px !important;
 	color: #07D207 !important;
 }
+
+md-toast{
+	position: fixed !important;
+	top: 5;
+	right: 5;
+}

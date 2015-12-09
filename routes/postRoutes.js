@@ -68,27 +68,22 @@ router.put("/:id", (req, res, next) => {
 
 router.put("/upvote/:id", auth, (req, res, next) => {
   Post.findOne({ _id : req.params.id }).exec((err, result) => {
-    console.log(result.upVoters.length);
     for (var i = 0; i < result.upVoters.length; i++){
       if(result.upVoters[i] == req.payload._id){
-        console.log('already voted');
         return res.send(result);
       }
       else if((i+1) >= result.upVoters.length){
         result.upVoters.push(req.payload._id);
         result.rating++;
         result.save();
-        console.log('vote saved!');
         for (var i = 0; i <result.downVoters.length; i++){
           if(result.downVoters[i] == req.payload._id){
             result.downVoters.splice(i, 1);
             result.upVoters.splice(result.upVoters.indexOf(req.payload._id), 1);
             result.save();
-            console.log('votes cleared!');
             return res.send(result);
           }
         }
-        console.log('vote saved!');
         return res.send(result);
       }
     }
@@ -99,7 +94,6 @@ router.put("/downvote/:id", auth, (req, res, next) => {
   Post.findOne({ _id : req.params.id }).exec((err, result) => {
     for (var i = 0; i < result.downVoters.length; i++){
       if(result.downVoters[i] == req.payload._id){
-        console.log('already voted');
         return res.send(result);
       }
       else if((i+1 >= result.downVoters.length)){
@@ -111,11 +105,9 @@ router.put("/downvote/:id", auth, (req, res, next) => {
             result.upVoters.splice(i, 1);
             result.downVoters.splice(result.downVoters.indexOf(req.payload._id), 1);
             result.save();
-            console.log('votes cleared!');
             return res.send(result);
           }
         }
-        console.log('vote saved!');
         return res.send(result);
       }
     }
