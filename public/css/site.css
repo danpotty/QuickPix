@@ -1,5 +1,6 @@
 html, body, md-content{
 	background-color: #B6B9BD !important;
+	color: #2F343C !important;
 }
 
 md-toolbar{
@@ -25,3 +26,35 @@ md-toast{
 	top: 5;
 	right: 5;
 }
+
+
+form {
+    md-input-container {
+      label {
+        color: white;
+      }
+      &:not(.md-input-valid).md-input-focused {
+        input,
+        label {
+          border-color: white;
+          text-decoration: none;
+          color: white;
+        }
+      }
+      &:not(.md-input-invalid).md-input-has-value label {
+        color: white;
+      }
+      label,
+      input {
+        color: white;
+        text-decoration: white;
+        border-color: white;
+      }
+    }
+    label {
+      button.md-button.md-raised[disabled] {
+        background-color: rgb(154, 0, 0);
+        color: white;
+      }
+    }
+  }
