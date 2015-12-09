@@ -35,23 +35,12 @@
                 <md-card-content style="overflow-y: auto;" layout="column">
                     <div ng-repeat="c in vm.post.comments">
                         <p> {{c.message}}</p>
-<!--                         <p>{{c.user}}</p>
- -->                        <div layout ng-show="global.status._id == c.user">
+                         <div layout >
                             <span flex></span>
-                            <md-button class="smallButt" ng-click="vm.startEditC(c);"><span class="glyphicon glyphicon-edit"></span></md-button>
-                            <md-button class="smallButt" ng-click="vm.deleteComment(c)"><span class="glyphicon glyphicon-trash"></span></md-button>
+                            <md-button ng-show="global.status._id == c.user" class="smallButt" ng-click="vm.startEditC(c);"><span class="glyphicon glyphicon-edit"></span></md-button>
+                            <md-button ng-show="global.status._id == c.user || global.status._id == vm.post.createdBy" class="smallButt" ng-click="vm.deleteComment(c)"><span class="glyphicon glyphicon-trash"></span></md-button>                        
                         </div>
-
-                        <div layout ng-show="global.status._id == c.post.createdBy">
-                            <span flex></span>
-                                <md-button class="smallButt" ng-click="vm.deleteComment(c)"><span class="glyphicon glyphicon-trash"></span></md-button>
-                        </div>
-
-                        <!-- <div layout >
-                            <span flex></span>
-                            <md-button class="smallButt" ng-click="vm.startEditC(c);"><span class="glyphicon glyphicon-edit"></span></md-button>
-                            <md-button class="smallButt" ng-click="vm.deleteComment(c)"><span class="glyphicon glyphicon-trash"></span></md-button>
-                        </div>    -->
+                        <md-divider>
                     </div>
                 </md-card-content>
             </md-card>
