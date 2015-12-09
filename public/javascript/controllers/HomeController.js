@@ -25,7 +25,7 @@
                 res.createdBy = {};
                 res.createdBy._id = UserFactory.status._id;
                 res.createdBy.username = UserFactory.status.username;
-                vm.posts.push(res);
+                vm.posts.unshift(res);
                 vm.post = {};
                 vm.preview = false;
                 $mdToast.show(

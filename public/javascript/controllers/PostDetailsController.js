@@ -14,18 +14,19 @@
 
         vm.createComment = function() {
           console.log(vm.comment);
-          if(!vm.comment){
+          if(!vm.comment || vm.comment.message === ""){
             $mdToast.show(
                 $mdToast.simple()
                 .content('Please fill in the comment field!')
                 .position('top left')
                 .hideDelay(3000)
             );
+            vm.comment = null;
             return
           }
             CommentFactory.createComment(vm.post._id, vm.comment).then(function(res) {
                 res.user = UserFactory.status._id;
-                vm.post.comments.push(res);
+                vm.post.comments.unshift(res);
                 vm.comment = null;
                 $mdToast.show(
                     $mdToast.simple()
