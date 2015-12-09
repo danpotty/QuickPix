@@ -21,7 +21,7 @@
                 res.createdBy.username = UserFactory.status.username;
                 vm.posts.push(res);
                 vm.post = {};
-                vm.preview = false;
+                // vm.preview = false;
             });
         };
 
