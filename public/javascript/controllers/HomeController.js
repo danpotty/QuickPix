@@ -51,33 +51,34 @@
 
     vm.upVote = function(post) {
       for (var i = 0; i < post.upVoters.length; i++) {
-        console.log('upvote uppers:');
-        console.log(post.upVoters[i]);
         if (post.upVoters[i] == UserFactory.status._id) {
           console.log('already voted! (controller 55)');
           return
         } else if ((i + 1) >= post.upVoters.length) {
-          HomeFactory.upVote(post._id).then(function(res) {
-            for (var u = 0; u < post.downVoters.length; u++){
-              if(post.downVoters[u] == UserFactory.status._id){
-                post.downVoters.splice(i, 1);
-                post.rating++;
-                console.log('votes cleared! (controller 65)');
-              }
-              else if((u + 1) >= post.downVoters.length) {
+          for (var u = 0; u < post.downVoters.length; u++){
+            if(post.downVoters[u] == UserFactory.status._id){
+              post.downVoters.splice(u, 1);
+              post.rating++;
+              console.log('votes cleared! (controller 64)');
+              HomeFactory.upVote(post._id).then(function(res) {
+              });
+              return
+            }
+            else if ((u + 1) >= post.downVoters.length){
+              HomeFactory.upVote(post._id).then(function(res) {
                 post.upVoters.push(UserFactory.status._id);
                 post.rating++;
-              }
+                console.log('vote saved!');
+                return
+              });
             }
-          });
+          }
         }
       }
     };
 
     vm.downVote = function(post) {
       for (var i = 0; i < post.downVoters.length; i++) {
-        console.log('downvote downers:');
-        console.log(post.downVoters[i]);
         if (post.downVoters[i] == UserFactory.status._id) {
           console.log('already voted!(controller 76)');
           return
@@ -85,13 +86,16 @@
           HomeFactory.downVote(post._id).then(function(res) {
             for (var u = 0; u < post.upVoters.length; u++){
               if(post.upVoters[u] == UserFactory.status._id){
-                post.upVoters.splice(i, 1);
+                post.upVoters.splice(u, 1);
                 post.rating--;
                 console.log('votes cleared! (controller 90)');
+                return
               }
               else if ((u + 1) >= post.upVoters.length){
                 post.downVoters.push(UserFactory.status._id);
                 post.rating--;
+                console.log('vote saved!');
+                return
               }
             }
           });
