@@ -33,6 +33,8 @@ router.post("/:id", auth, (req, res, next) => {
 			if(err) return next(err);
 			Post.update({ _id : req.params.id }, { $push: { comments: result._id }}, (err, post) => {
 				if(err) return next(err);
+        console.log('commentRoutes(36), new comment:');
+        console.log(comment._id);
 				res.send(result);
 			});
 		});
@@ -49,11 +51,16 @@ router.put("/:id", (req, res, next) => {
 });
 
 router.delete("/:id", (req, res, next) => {
+  console.log('commentRoutes(53), deleting comment:');
+  console.log(req.params.id);
 	Comment.remove({ _id : req.params.id }, (err, result) => {
 		if(err) return next(err);
 		Post.findOneAndUpdate({ "comments" : req.params.id }, { $pull : { comments : req.params.id }}, (err, result) => {
 			if(err) return next(err);
-			res.send(result);
+      User.findOneAndUpdate({ "comments" : req.params.id }, { $pull : { comments : req.params.id }}, (err, result) => {
+  			if(err) return next(err);
+			    res.send(result);
+      });
 		});
 	});
 });
