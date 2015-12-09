@@ -24,7 +24,8 @@ md-toolbar{
 md-toast{
 	font-size: 20px;
 	position: fixed !important;
-	background-color: rgba(47, 92, 35, 0.8);
+	background-color: #4D0000 !important;
+	color: #B6B9BD !important;
 }
 
 
