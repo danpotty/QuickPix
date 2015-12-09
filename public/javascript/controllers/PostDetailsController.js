@@ -1,7 +1,8 @@
 (function() {
     'use strict';
     angular.module('app')
-        .controller('PostDetailsController', PostDetailsController);
+        .controller('PostDetailsController', PostDetailsController)
+        .controller("CommentsModalController", CommentsModalController)
 
     function PostDetailsController($state, $stateParams, CommentFactory, UserFactory) {
         var vm = this;
