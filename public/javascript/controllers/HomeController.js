@@ -6,6 +6,7 @@
     function HomeController(UserFactory, HomeFactory, $state, $stateParams, $scope) {
         var vm = this;
         vm.post = {};
+        vm.preview = false;
 
 
         HomeFactory.getAllPosts().then(function(res) {
@@ -19,6 +20,7 @@
                 res.createdBy.username = UserFactory.status.username;
                 vm.posts.push(res);
                 vm.post = {};
+                vm.preview = false;
             });
         };
 
@@ -108,9 +110,15 @@
                 var mimetype = blob.mimetype;
                 var size = blob.size;
                 vm.post.image = url;
+
+                if(blob !== null){
+                  vm.preview = true;
+               };
+               vm.post.message = " ";
             });
+
+
+
         };
-
-
     };
 })();
