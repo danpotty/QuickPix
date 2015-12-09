@@ -35,7 +35,8 @@
                 <md-card-content style="overflow-y: auto;" layout="column">
                     <div ng-repeat="c in vm.post.comments">
                         <p> {{c.message}}</p>
-                        <div layout ng-show="global.status._id == c.user">
+<!--                         <p>{{c.user}}</p>
+ -->                        <div layout ng-show="global.status._id == c.user">
                             <span flex></span>
                             <md-button class="smallButt" ng-click="vm.startEditC(c);"><span class="glyphicon glyphicon-edit"></span></md-button>
                             <md-button class="smallButt" ng-click="vm.deleteComment(c)"><span class="glyphicon glyphicon-trash"></span></md-button>
