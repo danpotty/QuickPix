@@ -8,7 +8,7 @@
                         <div>
                             <img ui-sref="PostDetails({id: p._id})" style="width:400px; height: 400px;" ng-src='{{p.image}}' />
                             <p><strong>{{p.message}}</strong></p>                 
-                            <p>{{ p.rating }} enjoyments</p>
+                            <p>Enjoyments: {{ p.rating }}</p>
                         </div>
                         <div>
                             <md-button class="smallButt" ng-click="vm.openProfileModal($event, p)"><span class="glyphicon glyphicon-edit"></span></md-button>

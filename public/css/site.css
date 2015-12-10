@@ -1,7 +1,7 @@
 html, body, md-content{
 	background-color: #B6B9BD !important;
 	color: #2F343C !important;
-	font-family: arial !important;
+	font-family: courier !important;
     font-weight: lighter !important;
 }
 
@@ -32,6 +32,8 @@ md-toast{
 
 h1{
   text-align: center !important;
+  font-size: 70px;
+  font-weight: lighter;
 }
 
 .toolbarStyle{
