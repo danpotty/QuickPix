@@ -25,7 +25,7 @@
                         <md-card-content flex="33" layout="column" layout-align="space-between">
                             <div>
                                 <img style="width:400px; height: 400px;" ui-sref="PostDetails({id: p._id})" ng-src='{{p.image}}' />
-                                <p><i>{{p.message}}</i></p>
+                                <p><strong>{{p.message}}</strong></p>
                                 <p><i>Posted By: {{p.createdBy.username}}</i></p>
                             </div>
                             <div layout="row" ng-show="global.status._id == p.createdBy._id">
