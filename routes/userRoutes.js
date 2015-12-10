@@ -13,6 +13,7 @@ let auth = jwt({
 
 router.get("/profile/", auth, (req, res, next) => {
 	Post.find({ createdBy : req.payload._id })
+	.sort("-dateCreated")
 	.exec((err, result) => {
 		if(err) return next(err);
 		res.send(result);

@@ -13,6 +13,7 @@ let auth = jwt({
 
 router.get('/', (req, res, next) => {
     Post.find({})
+        .sort("-dateCreated")
         .populate("createdBy", "username")
         .exec((err, result) => {
             if (err) return next(err);
