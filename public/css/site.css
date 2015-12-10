@@ -44,8 +44,6 @@ h1{
 	font-size: 20px !important;
 }
 
-/*.card div img {
- border-radius: 2.5% !important;
- width: 100% !important;
- height: 200px !important;
-} */
+md-card{
+	background-color: #918692 !important;
+}
