@@ -14,7 +14,7 @@
         <span flex></span>
         <div layout layout-align="end center" ng-show="!global.status._id">
             <md-button ui-sref="Home"><span class="glyphicon glyphicon-home"></span></md-button>
-            <md-button ui-sref="Login">Login</md-button>
+            <md-button ng-click="global.openLoginModal($event)">Login</md-button>
             <md-button ng-click="global.openRegisterModal($event)">Register</md-button>
 
         </div>

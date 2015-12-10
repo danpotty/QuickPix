@@ -1,0 +1,31 @@
+<md-dialog style="width: 75%; text-align:center !important;" ng-cloak>
+   
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <span flex></span>
+                    <h2>Login</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">&times;</md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-content style="background-color: white !important">
+                        <form ng-submit="login()">
+                            <md-input-container>
+                                <label>Email</label>
+                                <input type="email" ng-model="user.email" />
+                            </md-input-container>
+                    
+                            <md-input-container>
+                                <label>Password</label>
+                                <input type="password" ng-model="user.password" />
+                            </md-input-container>
+                            <div layout layout-align="center">
+                                <md-button type="submit" class="md-raised md-warn">Submit</md-button>
+                            </div>
+                        </form>
+                </md-content>
+            </div>
+        </md-dialog-content>
+</md-dialog>
