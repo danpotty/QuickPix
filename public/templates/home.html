@@ -1,4 +1,3 @@
-<h1 class="animated pulse">HOME</h1>
 <md-content>
     <div layout="column" ng-show="global.status._id">
         <br>
@@ -18,13 +17,12 @@
     </div>
     <md-divider />
     <div ng-cloak layout layout="column" layout-align="center">
-        <md-list layout="row" layout-wrap>
-            <md-list-item class="md-4-line" ng-repeat="p in vm.posts">
-                <md-content class="md-padding" layout-align="center" >
+        <div layout="row" layout-wrap>
+            <div ng-repeat="p in vm.posts" layout="column" class="md-padding" layout-align="center" flex-gt-md="33" flex-gt-sm="50" flex-sm="100"> 
                     <md-card>
-                        <md-card-content flex="33" layout="column" layout-align="space-between" >
+                        <md-card-content  layout="column" layout-align="space-between" >
                             <div>
-                                <img style="width:400px; height: 400px;" ui-sref="PostDetails({id: p._id})" ng-src='{{p.image}}' />
+                                <img style="width:100%; height: 400px;" ui-sref="PostDetails({id: p._id})" ng-src='{{p.image}}' />
                                 <p><strong>{{p.message}}</strong></p>
                                 <p><i>Posted By: {{p.createdBy.username}}</i></p>
                             </div>
@@ -45,8 +43,6 @@
                             </div>
                         </md-card-content>
                     </md-card>
-
-                </md-content>
-            </md-list-item>
-        </md-list>
+            </div>
+        </div>
     </div>

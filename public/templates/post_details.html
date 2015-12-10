@@ -13,11 +13,11 @@
 
 <div ng-cloak layout layout="column" layout-align="center">
     <md-content style="width: 100%;" class="md-padding" layout="row" layout-align="center">
-        <div flex layout-align="center" layout="row">
-            <md-card>
+        <div layout="row" style="width:100%" layout-align="center">
+            <md-card flex="33">
                 <md-card-content layout="column" layout-align="space-between">
 
-                        <img style="width: 400px; height: 400px;" ng-src='{{vm.post.image}}' />
+                        <img style="width: 100%; height: 400px;" ng-src='{{vm.post.image}}' />
                         <p><strong>{{vm.post.message}}</strong></p>
 
                 </md-card-content>

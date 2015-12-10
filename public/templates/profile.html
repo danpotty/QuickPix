@@ -1,22 +1,20 @@
 <h1 class="animated pulse" ng-show="global.status._id">{{global.status.username}}'s Profile</h1>
 <div ng-cloak layout layout="column" layout-align="center">
-    <md-list layout="row" layout-wrap>
-        <md-list-item class="md-4-line" ng-repeat="p in vm.posts">
-            <md-content class="md-padding" layout-align="center">
-                <md-card>
-                    <md-card-content layout="column" layout-align="space-between">
-                        <div>
-                            <img ui-sref="PostDetails({id: p._id})" style="width:400px; height: 400px;" ng-src='{{p.image}}' />
-                            <p><strong>{{p.message}}</strong></p>                 
-                            <p>Enjoyments: {{ p.rating }}</p>
-                        </div>
-                        <div>
-                            <md-button class="smallButt" ng-click="vm.openProfileModal($event, p)"><span class="glyphicon glyphicon-edit"></span></md-button>
-                            <md-button class="smallButt" ng-click="vm.deletePost(p)"><span class="glyphicon glyphicon-trash"></span></md-button>
-                        </div>
-                    </md-card-content>
-                </md-card>
-            </md-content>
-        </md-list-item>
-    </md-list>
+    <div layout="row" layout-wrap>
+        <div class="md-4-line" flex-gt-md="33" flex-gt-sm="50" flex-sm="100" ng-repeat="p in vm.posts" class="md-padding" layout-align="center">
+            <md-card style="height: 580px;">
+                <md-card-content layout="column" layout-align="space-between">
+                    <div>
+                        <img ui-sref="PostDetails({id: p._id})" style="width:400px; height: 400px;" ng-src='{{p.image}}' />
+                        <p><strong>{{p.message}}</strong></p>
+                        <p>Enjoyments: {{ p.rating }}</p>
+                    </div>
+                    <div>
+                        <md-button class="smallButt" ng-click="vm.openProfileModal($event, p)"><span class="glyphicon glyphicon-edit"></span></md-button>
+                        <md-button class="smallButt" ng-click="vm.deletePost(p)"><span class="glyphicon glyphicon-trash"></span></md-button>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
 </div>
