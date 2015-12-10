@@ -60,9 +60,11 @@
                 vm.editPost = null;
             });
         };
+
         //------------------------------------------------------
-        //------------------RATING FUNCTIONS-------------------
+        //------------------RATING FUNCTIONS--------------------
         //------------------------------------------------------
+
         vm.upVote = function(post) {
             for (var i = 0; i < post.upVoters.length; i++) {
                 if (post.upVoters[i] == UserFactory.status._id) {
@@ -71,7 +73,6 @@
                         .content('Photo already rated!')
                         .hideDelay(2250)
                     );
-                    // console.log('already voted! (controller 55)');
                     return
                 } else if ((i + 1) >= post.upVoters.length) {
                     for (var u = 0; u < post.downVoters.length; u++) {
@@ -83,7 +84,6 @@
                                 .content('Rating Cleared!')
                                 .hideDelay(2250)
                             );
-                            // console.log('votes cleared! (controller 64)');
                             HomeFactory.upVote(post._id).then(function(res) {});
                             return
                         } else if ((u + 1) >= post.downVoters.length) {
@@ -95,7 +95,6 @@
                                     .content('Rating Saved!')
                                     .hideDelay(2250)
                                 );
-                                // console.log('vote saved!');
                                 return
                             });
                         }
@@ -111,7 +110,6 @@
                         .content('Photo already rated!')
                         .hideDelay(2250)
                     );
-                    // console.log('already voted!(controller 76)');
                     return
                 } else if ((i + 1) >= post.downVoters.length) {
                     HomeFactory.downVote(post._id).then(function(res) {
@@ -124,7 +122,6 @@
                                     .content('Rating Cleared!')
                                     .hideDelay(2250)
                                 );
-                                // console.log('votes cleared! (controller 90)');
                                 return
                             } else if ((u + 1) >= post.upVoters.length) {
                                 post.downVoters.push(UserFactory.status._id);
@@ -134,7 +131,6 @@
                                     .content('Rating Saved!')
                                     .hideDelay(2250)
                                 );
-                                // console.log('vote saved!');
                                 return
                             }
                         }
@@ -143,9 +139,10 @@
             }
         };
 
-        //------------------------------------------------------
-        //------------------FILE PICKER FUNCTIONS-------------------
-        //------------------------------------------------------
+        //-----------------------------------------------------------
+        //------------------FILE PICKER & MODAL FUNCTIONS------------
+        //-----------------------------------------------------------
+
         vm.pic = function() {
             filepicker.setKey("AI7euAQRrqFuwZR6Jg1Zwz");
             filepicker.pick({
@@ -194,8 +191,9 @@
         };
     };
     //------------------------------------------------------
-    //------------------EDIT MODAL FUNCTIONS-------------------
+    //------------------MODAL FUNCTIONS---------------------
     //------------------------------------------------------
+    
     function HomeDialogueController($scope, $mdDialog, post) {
         $scope.post = angular.copy(post);
         $scope.updateProf = function() {

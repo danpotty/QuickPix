@@ -1,6 +1,8 @@
 html, body, md-content{
 	background-color: #B6B9BD !important;
 	color: #2F343C !important;
+	font-family: sans-serif !important;
+    font-weight: lighter !important;
 }
 
 md-toolbar{
@@ -28,34 +30,20 @@ md-toast{
 	color: #B6B9BD !important;
 }
 
+h1{
+  text-align: center !important;
+}
 
-form {
-    md-input-container {
-      label {
-        color: white;
-      }
-      &:not(.md-input-valid).md-input-focused {
-        input,
-        label {
-          border-color: white;
-          text-decoration: none;
-          color: white;
-        }
-      }
-      &:not(.md-input-invalid).md-input-has-value label {
-        color: white;
-      }
-      label,
-      input {
-        color: white;
-        text-decoration: white;
-        border-color: white;
-      }
-    }
-    label {
-      button.md-button.md-raised[disabled] {
-        background-color: rgb(154, 0, 0);
-        color: white;
-      }
-    }
-  }
+.toolbarStyle{
+	margin: 40px !important;
+}
+
+#logoStyle{
+	font-size: 20px !important;
+}
+
+/*.card div img {
+ border-radius: 2.5% !important;
+ width: 100% !important;
+ height: 200px !important;
+} */

@@ -1,11 +1,10 @@
+<h1 class="animated pulse" ng-show="global.status._id">{{global.status.username}}'s Profile</h1>
 <div ng-cloak layout layout="column" layout-align="center">
     <md-list layout="row" layout-wrap>
         <md-list-item class="md-4-line" ng-repeat="p in vm.posts">
             <md-content class="md-padding" layout-align="center">
                 <md-card>
                     <md-card-content layout="column" layout-align="space-between">
-                        
-
                         <div>
                             <img ui-sref="PostDetails({id: p._id})" style="width:400px; height: 400px;" ng-src='{{p.image}}' />
                             <p><i>{{p.message}}</i></p>                 

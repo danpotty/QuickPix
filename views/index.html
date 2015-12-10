@@ -7,24 +7,23 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
     <link rel="stylesheet" type="text/css" href="/css/site.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/animate.css">
 </head>
-
 <body ng-controller="GlobalController as global">
     <md-toolbar layout>
-        <div layout layout-align="end center">
-          <h3 ng-show="global.status._id">Welcome {{global.status.username}}!</h3>
-          <h3 ng-show="!global.status._id">Welcome!</h3>
+        <div class="toolbarStyle" layout layout-align="end center">
+          <h3 ng-show="global.status._id">Hello, {{global.status.username}}!</h3>
+          <h3 ng-show="!global.status._id">Hello!</h3>
         </div>
         <span flex></span>
-        <div>
-          <h1>QuickPix</h1>
+        <div class="toolbarStyle" id="logoStyle">
+          <img src="/css/logo.png" />
         </div>
         <span flex></span>
         <div layout layout-align="end center" ng-show="!global.status._id">
             <md-button ui-sref="Home"><span class="glyphicon glyphicon-home"></span></md-button>
             <md-button ng-click="global.openLoginModal($event)">Login</md-button>
             <md-button ng-click="global.openRegisterModal($event)">Register</md-button>
-
         </div>
         <div layout layout-align="end center" ng-show="global.status._id">
             <md-button ui-sref="Home"><span class="glyphicon glyphicon-home"></span></md-button>
@@ -34,7 +33,7 @@
     </md-toolbar>
     <ui-view></ui-view>
     <!-- Ext Libs -->
-        <script src="//api.filepicker.io/v2/filepicker.js"></script>
+    <script src="//api.filepicker.io/v2/filepicker.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js"></script>

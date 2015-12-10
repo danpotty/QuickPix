@@ -13,7 +13,6 @@ let auth = jwt({
 
 router.get('/', (req, res, next) => {
     Post.find({})
-        // .populate('image', 'message', 'dateCreated', 'rating', 'createdBy')
         .populate("createdBy", "username")
         .exec((err, result) => {
             if (err) return next(err);
@@ -28,7 +27,6 @@ router.post("/", auth, (req, res, next) => {
   post.upVoters.push('init');
   post.downVoters.push('init');
   post.image = req.body.image;
-  // post.rating++;
 	post.save((err, result) => {
 		if(err) return next(err);
 		if(!result) return next("Could not create post");
@@ -113,6 +111,5 @@ router.put("/downvote/:id", auth, (req, res, next) => {
     }
   });
 });
-
 
 module.exports = router;

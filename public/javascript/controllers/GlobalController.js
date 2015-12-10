@@ -51,8 +51,6 @@
                 });
         }
 
-
-
         vm.logout = UserFactory.removeToken;
 
     };
