@@ -12,7 +12,8 @@
 <body ng-controller="GlobalController as global">
     <md-toolbar layout>
         <div layout layout-align="end center">
-          <h3>Welcome {{global.status.username}}!</h3>
+          <h3 ng-show="global.status._id">Welcome {{global.status.username}}!</h3>
+          <h3 ng-show="!global.status._id">Welcome!</h3>
         </div>
         <span flex></span>
         <div>
