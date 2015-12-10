@@ -66,11 +66,21 @@
         //------------------------------------------------------
 
         vm.upVote = function(post) {
+          if(!UserFactory.status._id){
+            $mdToast.show(
+                $mdToast.simple()
+                .content('You need to log in to rate photos!')
+                .position('top left')
+                .hideDelay(2250)
+            );
+            return
+          }
             for (var i = 0; i < post.upVoters.length; i++) {
                 if (post.upVoters[i] == UserFactory.status._id) {
                     $mdToast.show(
                         $mdToast.simple()
                         .content('Photo already rated!')
+                        .position('top left')
                         .hideDelay(2250)
                     );
                     return
@@ -82,6 +92,7 @@
                             $mdToast.show(
                                 $mdToast.simple()
                                 .content('Rating Cleared!')
+                                .position('top left')
                                 .hideDelay(2250)
                             );
                             HomeFactory.upVote(post._id).then(function(res) {});
@@ -93,6 +104,7 @@
                                 $mdToast.show(
                                     $mdToast.simple()
                                     .content('Rating Saved!')
+                                    .position('top left')
                                     .hideDelay(2250)
                                 );
                                 return
@@ -103,11 +115,21 @@
             }
         };
         vm.downVote = function(post) {
+          if(!UserFactory.status._id){
+            $mdToast.show(
+                $mdToast.simple()
+                .content('You need to log in to rate photos!')
+                .position('top left')
+                .hideDelay(2250)
+            );
+            return
+          }
             for (var i = 0; i < post.downVoters.length; i++) {
                 if (post.downVoters[i] == UserFactory.status._id) {
                     $mdToast.show(
                         $mdToast.simple()
                         .content('Photo already rated!')
+                        .position('top left')
                         .hideDelay(2250)
                     );
                     return
@@ -120,6 +142,7 @@
                                 $mdToast.show(
                                     $mdToast.simple()
                                     .content('Rating Cleared!')
+                                    .position('top left')
                                     .hideDelay(2250)
                                 );
                                 return
@@ -129,6 +152,7 @@
                                 $mdToast.show(
                                     $mdToast.simple()
                                     .content('Rating Saved!')
+                                    .position('top left')
                                     .hideDelay(2250)
                                 );
                                 return
@@ -193,7 +217,7 @@
     //------------------------------------------------------
     //------------------MODAL FUNCTIONS---------------------
     //------------------------------------------------------
-    
+
     function HomeDialogueController($scope, $mdDialog, post) {
         $scope.post = angular.copy(post);
         $scope.updateProf = function() {
