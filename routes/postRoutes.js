@@ -8,7 +8,7 @@ let User = mongoose.model('User');
 let jwt = require('express-jwt');
 let auth = jwt({
     userProperty: 'payload',
-    secret: 'hiskett & sons'
+    secret: process.env.AUTH_SECRET
 });
 
 router.get('/', (req, res, next) => {

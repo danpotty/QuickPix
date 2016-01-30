@@ -1,24 +1,31 @@
 <md-content>
     <div layout="column" ng-show="global.status._id">
         <br>
-        <form ng-submit="vm.createPost()" ng-show="!vm.isEditing" layout-padding flex>
-            <md-input-container layout="row">
-                <div>
-                    <md-button type="button" ng-click="vm.pic()">Click to Upload an Image &nbsp; <span class="glyphicon glyphicon-picture"></span></md-button><span ng-show="vm.preview" class="glyphicon glyphicon-ok"></span>
-                </div>
-            </md-input-container>
+        <div ng-show="!vm.showUpload && global.status._id" style="margin:auto;">
+          <md-button ng-click="vm.upload();" class="BigButt">Click to upload a photo</md-button>
+        </div>
+        <div ng-show="vm.showUpload;" style="width:90%; margin:auto; border:1px solid black">
+          <form ng-submit="vm.createPost()" ng-show="!vm.isEditing" layout-padding flex>
+              <md-input-container layout="row">
+                  <div>
+                      <md-button type="button" ng-click="vm.pic()">Click to Upload an Image &nbsp; <span class="glyphicon glyphicon-picture"></span></md-button><span ng-show="vm.preview" class="glyphicon glyphicon-ok"></span>
+                  </div>
+              </md-input-container>
 
-            <md-input-container flex >
-                <label>Enter Caption (optional) </label>
-                <input type="text" ng-model="vm.post.message" />
-            </md-input-container>
-            <md-button type="submit" flex>Submit</md-button>
-        </form>
+              <md-input-container flex >
+                  <label>Enter Caption (optional) </label>
+                  <input type="text" ng-model="vm.post.message" />
+              </md-input-container>
+              <md-button type="submit" flex>Submit</md-button>
+              <md-button ng-click="vm.cancelUpload();">Cancel</md-button>
+          </form>
+        </div>
     </div>
+    <br>
     <md-divider />
     <div ng-cloak layout layout="column" layout-align="center">
         <div layout="row" layout-wrap>
-            <div ng-repeat="p in vm.posts" layout="column" class="md-padding" layout-align="center" flex-gt-md="33" flex-gt-sm="50" flex-sm="100"> 
+            <div ng-repeat="p in vm.posts" layout="column" class="md-padding" layout-align="center" flex-gt-md="33" flex-gt-sm="50" flex-sm="100">
                     <md-card>
                         <md-card-content  layout="column" layout-align="space-between" >
                             <div>

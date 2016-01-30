@@ -1,4 +1,7 @@
 "use strict";
+require("dotenv").config({
+    silent: true
+});
 let express = require('express');
 let bodyParser = require('body-parser');
 let app = express();
@@ -9,8 +12,7 @@ require('./models/user');
 require('./models/post');
 require('./models/comment');
 require('./config/passport');
-if(process.env.NODE_ENV === 'test') mongoose.connect('mongodb://localhost/quickpix-test')
-else mongoose.connect('mongodb://localhost/quickpix')
+mongoose.connect(process.env.MONGO_URL);
 
 
 app.set('views', './views');

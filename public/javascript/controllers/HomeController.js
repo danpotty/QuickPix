@@ -8,10 +8,20 @@
         var vm = this;
         vm.post = {};
         vm.preview = false;
+        vm.showUpload = false;
 
         HomeFactory.getAllPosts().then(function(res) {
             vm.posts = res;
         });
+
+        vm.upload = function(){
+          vm.showUpload = true;
+        };
+
+        vm.cancelUpload = function(){
+          vm.showUpload = false;
+        };
+
         vm.createPost = function() {
           if(!vm.post.image){
             $mdToast.show(
@@ -34,8 +44,10 @@
                     .position('top left')
                     .hideDelay(2250)
                 );
+                vm.showUpload = false;
             });
         };
+
         vm.deletePost = function(post) {
             vm.posts.splice(vm.posts.indexOf(post), 1);
             HomeFactory.deletePost(post._id).then(function(res) {
@@ -47,11 +59,13 @@
               );
             });
         };
+
         vm.startEdit = function(post) {
             vm.isEditing = true;
             vm.selectedPost = post;
             vm.editPost = angular.copy(post);
         };
+
         vm.updatePost = function() {
             HomeFactory.updatePost(vm.editPost, vm.selectedPost).then(function(res) {
                 vm.posts[vm.posts.indexOf(vm.selectedPost)] = vm.editPost;

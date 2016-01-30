@@ -8,7 +8,7 @@ let Post = mongoose.model("Post");
 let jwt = require('express-jwt');
 let auth = jwt({
   userProperty: 'payload',
-  secret: 'hiskett & sons'
+  secret: process.env.AUTH_SECRET
 });
 
 router.get("/profile/", auth, (req, res, next) => {

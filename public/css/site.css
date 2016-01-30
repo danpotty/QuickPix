@@ -6,12 +6,16 @@ html, body, md-content{
 }
 
 md-toolbar{
-	background-color: #4D0000 !important;
+	background-color: #042d4e !important;
 }
 
 .smallButt{
 	min-width: 30px !important;
 	max-width: 30px !important;
+}
+
+.BigButt {
+	font-size: 2em !important;
 }
 
 .glyphicon-picture{
@@ -26,8 +30,8 @@ md-toolbar{
 md-toast{
 	font-size: 20px;
 	position: fixed !important;
-	background-color: #06022E !important;
-	color: #B6B9BD !important;
+	background-color: #e78e32 !important;
+	color: #787a7c !important;
 }
 
 h1{
@@ -45,5 +49,5 @@ h1{
 }
 
 md-card{
-	background-color: #918692 !important;
+	background-color: #7d908f !important;
 }

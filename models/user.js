@@ -43,7 +43,7 @@ UserSchema.methods.generateJWT = function(){
     _id: this._id,
     email: this.local.email,
     username: this.username
-  }, 'hiskett & sons');
+  }, process.env.AUTH_SECRET);
 };
 
 module.exports = mongoose.model('User', UserSchema);
