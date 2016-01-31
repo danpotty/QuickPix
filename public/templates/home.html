@@ -8,7 +8,7 @@
           <form ng-submit="vm.createPost()" ng-show="!vm.isEditing" layout-padding flex>
               <md-input-container layout="row">
                   <div>
-                      <md-button type="button" ng-click="vm.pic()">Click to Upload an Image &nbsp; <span class="glyphicon glyphicon-picture"></span></md-button><span ng-show="vm.preview" class="glyphicon glyphicon-ok"></span>
+                      <md-button type="button" ng-click="vm.pic()">Click to Upload an Image &nbsp; <div class="glyphicon glyphicon-picture"></div></md-button><div ng-show="vm.preview" class="glyphicon glyphicon-ok"></div>
                   </div>
               </md-input-container>
 
@@ -17,7 +17,7 @@
                   <input type="text" ng-model="vm.post.message" />
               </md-input-container>
               <md-button type="submit" flex>Submit</md-button>
-              <md-button ng-click="vm.cancelUpload();">Cancel</md-button>
+              <md-button type="button" ng-click="vm.cancelUpload();">Cancel</md-button>
           </form>
         </div>
     </div>
