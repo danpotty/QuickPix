@@ -13,8 +13,8 @@
               </md-input-container>
 
               <md-input-container flex >
-                  <label>Enter Caption (optional) </label>
-                  <input type="text" ng-model="vm.post.message" />
+                  <label>Enter Caption</label>
+                  <input type="text" ng-model="vm.post.message" required />
               </md-input-container>
               <md-button type="submit" flex>Submit</md-button>
               <md-button type="button" ng-click="vm.cancelUpload();">Cancel</md-button>
@@ -24,19 +24,17 @@
     <br>
     <md-divider />
     <div ng-cloak layout layout="column" layout-align="center">
-        <div layout="row" layout-wrap>
+        <div layout="row" layout-wrap style="width:100%;">
             <div ng-repeat="p in vm.posts" layout="column" class="md-padding" layout-align="center" flex-gt-md="33" flex-gt-sm="50" flex-sm="100">
-                    <md-card>
+                    <md-card style="height: 480px; width: 360px;">
                         <md-card-content  layout="column" layout-align="space-between" >
                             <div>
-                                <img style="width:100%; height: 400px;" ui-sref="PostDetails({id: p._id})" ng-src='{{p.image}}' />
+                                <img style="width:100%; height: 350px;" ui-sref="PostDetails({id: p._id})" ng-src='{{p.image}}' />
                                 <p><strong>{{p.message}}</strong></p>
                                 <p><i>Posted By: {{p.createdBy.username}}</i></p>
                             </div>
                             <div layout="row" ng-show="global.status._id == p.createdBy._id">
-                                <md-button class="smallButt" ng-click="vm.upVote(p)"><span class="glyphicon glyphicon-triangle-top"></span></md-button>
-                                <p>{{ p.rating }}</p>
-                                <md-button class="smallButt" ng-click="vm.downVote(p)"><span class="glyphicon glyphicon-triangle-bottom"></span></md-button>
+                                <p>Score: {{ p.rating }}</p>
                                 <span flex></span>
                                 <div>
                                     <md-button class="smallButt" ng-click="vm.openHomeModal($event, p)"><span class="glyphicon glyphicon-edit"></span></md-button>
@@ -44,9 +42,9 @@
                                 </div>
                             </div>
                             <div ng-show="global.status._id !== p.createdBy._id" layout="row" layout-align="center">
-                                <md-button class="smallButt" ng-click="vm.upVote(p)"><span class="glyphicon glyphicon-triangle-top"></span></md-button>
-                                <p>{{ p.rating }}</p>
                                 <md-button class="smallButt" ng-click="vm.downVote(p)"><span class="glyphicon glyphicon-triangle-bottom"></span></md-button>
+                                <p>{{ p.rating }}</p>
+                                <md-button class="smallButt" ng-click="vm.upVote(p)"><span class="glyphicon glyphicon-triangle-top"></span></md-button>
                             </div>
                         </md-card-content>
                     </md-card>
