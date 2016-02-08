@@ -2,7 +2,7 @@
 <div ng-cloak layout layout="column">
     <div layout="row" layout-wrap layout-align="left" style="width:100%;">
         <div flex-gt-md="33" flex-gt-sm="50" flex-sm="100" ng-repeat="p in vm.posts" class="md-padding" layout-align="center">
-            <md-card style="height: 580px;">
+            <md-card style="height: 580px; width: 420px;">
                 <md-card-content layout="column" layout-align="space-between">
                     <div style="text-align:center;">
                         <img ui-sref="PostDetails({id: p._id})" style="width:100%; height: 400px;" ng-src='{{p.image}}' />
